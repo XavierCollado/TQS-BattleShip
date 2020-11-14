@@ -3,7 +3,7 @@ package game;
 /**
  * 
  * @author xavier
- * @version 1.0
+ * @version 2.0
  *
  */
 public class Cell {
@@ -20,10 +20,10 @@ public class Cell {
 	}
 	
 	public void hit() {
-		
+		this.hit = true;
 	}
 	
 	public boolean ishit() {
-		return false;
+		return this.hit;
 	}
 }
