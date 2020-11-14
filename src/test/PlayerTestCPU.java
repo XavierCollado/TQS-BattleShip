@@ -9,22 +9,13 @@ import game.PlayerCPU;
 /**
  * 
  * @author desirée
- * @version 1.1
+ * @version 1.2
  *
  */
 class PlayerTestCPU {
-  //Test exceptions
-  //@Test
-  //public void testThrows()
-  //{
-    //RuntimeException e = expectException( RuntimeException.class, () ->
-    //{
-      //throw new RuntimeException( "fail!" );
-    //} );
-    //assert e.getMessage().equals( "fail!" );
-  //}
+
   @Test
-  public void TestException_posXBigger(){
+  public void TestException_posXBigger() throws Exception{
     //Given
 
     PlayerCPU playerCPU = new PlayerCPU();
@@ -33,10 +24,10 @@ class PlayerTestCPU {
     int turn = 1;
 
     //Then
-    assertEquals(playerCPU.playTurn(posX,posY,turn),OutOfBoard("posX or posY out of board."))
+    assertEquals(playerCPU.playTurn(posX,posY),Exception("posX or posY out of board."));
   }
   @Test
-  public void TestException_posYBigger(){
+  public void TestException_posYBigger() throws Exception{
     //Given
 
     PlayerCPU playerCPU = new PlayerCPU();
@@ -45,10 +36,10 @@ class PlayerTestCPU {
     int turn = 1;
 
     //Then
-    assertEquals(playerCPU.playTurn(posX,posY,turn),OutOfBoard("posX or posY out of board."))
+    assertEquals(playerCPU.playTurn(posX,posY),Exception("posX or posY out of board."));
   }
   @Test
-  public void TestException_posXnegative(){
+  public void TestException_posXnegative() throws Exception{
     //Given
 
     PlayerCPU playerCPU = new PlayerCPU();
@@ -57,10 +48,10 @@ class PlayerTestCPU {
     int turn = 1;
 
     //Then
-    assertEquals(playerCPU.playTurn(posX,posY,turn),OutOfBoard("posX or posY out of board."))
+    assertEquals(playerCPU.playTurn(posX,posY),Exception("posX or posY out of board."));
   }
   @Test
-  public void TestException_posYnegative(){
+  public void TestException_posYnegative() throws Exception{
     //Given
 
     PlayerCPU playerCPU = new PlayerCPU();
@@ -69,7 +60,7 @@ class PlayerTestCPU {
     int turn = 1;
 
     //Then
-    assertEquals(playerCPU.playTurn(posX,posY,turn),OutOfBoard("posX or posY out of board."))
+    assertEquals(playerCPU.playTurn(posX,posY),Exception("posX or posY out of board."));
   }
   @Test
   public void TestCheckWinPositive(){
@@ -78,7 +69,7 @@ class PlayerTestCPU {
     int boatsCount = 5;
 
     //Then
-    assertEquals(true,playerCPU.checkWinCondition())
+    assertEquals(true,playerCPU.checkWinCondition());
   }
   @Test
   public void TestCheckWinNegative(){
@@ -87,7 +78,7 @@ class PlayerTestCPU {
     int boatsCount = 2;
 
     //Then
-    assertEquals(false,playerCPU.checkWinCondition())
+    assertEquals(false,playerCPU.checkWinCondition());
   }
 
 }

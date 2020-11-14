@@ -8,9 +8,9 @@ import java.awt.event.KeyListener;
 import java.lang.String;
 /**
  * @author desirée
- * @version 1.3
+ * @version 1.4
  */
-//we should put Cursor cursor (we use posX, posY) and also Cell cell (we use cell) ??
+
 public class PlayerCPU implements Player{
   private BoatsStatus boatsStatus;
   private Board board;
@@ -94,7 +94,7 @@ public class PlayerCPU implements Player{
       }
     }
   }
-  public void playTurn(int posX,int posY,int torn) throws Exception{
+  public void playTurn(int posX,int posY) throws Exception{
 
     if (posX < 0) {
       throw new Exception("posX or posY out of board.");
