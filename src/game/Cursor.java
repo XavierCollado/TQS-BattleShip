@@ -4,7 +4,7 @@ package game;
 /**
  * 
  * @author xavier
- * @version 1.0
+ * @version 2.0
  * 
  */
 public class Cursor {
@@ -42,7 +42,7 @@ public class Cursor {
 	public void setPosY(int newPosY) {
 		if(newPosY < 0) {
 			this.posY = this.lenghtY-1;
-		} else if (newPosY < this.lenghtX) {
+		} else if (newPosY < this.lenghtY) {
 			this.posY = newPosY;
 		} else {
 			this.posY = 0;
