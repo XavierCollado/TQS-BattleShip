@@ -94,6 +94,7 @@ public class PlayerCPU implements Player{
       }
     }
   }
+  //It's necessary create Exception class!
   public void playTurn(int posX,int posY) throws Exception{
 
     if (posX < 0) {
