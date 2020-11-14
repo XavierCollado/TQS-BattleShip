@@ -26,4 +26,8 @@ public class Cell {
 	public boolean ishit() {
 		return this.hit;
 	}
+	
+	public String getType() {
+		return this.type;
+	}
 }
