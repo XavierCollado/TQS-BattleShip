@@ -24,12 +24,27 @@ public class Game {
 		this.isPlaying = true;
 	}
 	
+	public int getScreen() {
+		return this.screen;
+	}
+	
 	public void readInput() {
 		
 	}
 	
-	public void printScreen() {
-		
+	public void printScreen(int screem) {
+		switch(screen) {
+			case 0:
+				this.printMenuScreen();
+				break;				
+			case 1:
+				this.printSelectionScreen();
+				break;
+			case 2:
+				this.printBoardScreen();
+				break;
+			default:
+		}
 	}
 	
 	public void endGame() {

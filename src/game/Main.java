@@ -1,36 +1,20 @@
 package game;
 
+/**
+ * 
+ * @author xavier
+ * @version 1.0
+ */
 public class Main {
-
-	private static String textMessage=""
-			+ "╔═════════════════════════════════════════════════╗\n"
-			+ "║                                                 ║\n"
-			+ "║                                                 ║\n"
-			+ "║                   BATTLESHIPS                   ║\n"
-			+ "║                                                 ║\n"
-			+ "║                                                 ║\n"
-			+ "║                                                 ║\n"
-			+ "║                                                 ║\n"
-			+ "║                                                 ║\n"
-			+ "║            (PRESS ENTER TO SELECT)              ║\n"
-			+ "║                                                 ║\n"
-			+ "╠═════════════════════════════════════════════════╣\n"
-			+ "║                                                 ║\n"
-			+ "║  · Single Player                                ║\n"
-			+ "║                                                 ║\n"
-			+ "║  · Two Players                                  ║\n"
-			+ "║                                                 ║\n"
-			+ "║                                                 ║\n"
-			+ "║                                                 ║\n"
-			+ "║                                                 ║\n"
-			+ "║  · Exit Game                                    ║\n"
-			+ "║                                                 ║\n"
-			+ "╚═════════════════════════════════════════════════╝";
-			
-	
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		System.out.println(textMessage);
+		Game game = new Game();
+		Cursor cursorMenu = new Cursor(1, 2);
+		Cursor cursorBoard = new Cursor(10, 10);
+		
+		// Main game loop
+		while(game.isPlaying()) {
+			game.printScreen(game.getScreen());
+		}
 	}
 
 }
