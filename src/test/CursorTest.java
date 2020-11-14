@@ -7,6 +7,12 @@ import org.junit.jupiter.api.Assertions;
 
 import game.Cursor;
 
+/**
+ * 
+ * @author xavier
+ * @version 1.0
+ * 
+ */
 class CursorTest {
 
 	@Test
