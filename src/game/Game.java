@@ -23,6 +23,10 @@ public class Game {
 		this.screen = 0;
 		this.isPlaying = true;
 	}
+
+	public void updateCursorDimensions() {
+		
+	}
 	
 	public int getScreen() {
 		return this.screen;
