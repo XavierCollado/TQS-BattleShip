@@ -4,7 +4,7 @@ package game;
 /**
  * 
  * @author xavier
- * @version 3.0
+ * @version 4.0
  * 
  */
 public class Cursor {
@@ -59,6 +59,6 @@ public class Cursor {
 	}
 	
 	public void changeHorientation() {
-		
+		this.isHorizontal = !this.isHorizontal;
 	}
 }

@@ -8,7 +8,7 @@ import game.Cursor;
 /**
  * 
  * @author xavier
- * @version 3.0
+ * @version 4.0
  * 
  */
 class CursorTest {
