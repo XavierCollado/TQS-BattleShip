@@ -15,6 +15,7 @@ public class PlayerCPU implements Player{
   private boolean aliveCruiser;
   private boolean aliveSubmarine;
   private boolean aliveDestroyer;
+  private boolean isWin;
   private Cursor cursor;
   public PlayerCPU(){
     this.boatsStatus = new BoatsStatus();
@@ -28,6 +29,7 @@ public class PlayerCPU implements Player{
     this.aliveSubmarine = true;
     this.aliveDestroyer = true;
   }
+
   public void playTurn(int posX,int posY,int torn){
     if(torn == 0){
       if(posX < 0){
@@ -95,13 +97,13 @@ public class PlayerCPU implements Player{
         }
       }
   }
-  private boolean checkWinCondition(){
+  private boolean checkWinCondition() {
 
     boolean win = false;
     if(boatsCount == 5){
       win = true;
     }
-    return win;
+    return this.win;
   }
   public boolean isCarrierAlive(){
     return aliveCarrier;
