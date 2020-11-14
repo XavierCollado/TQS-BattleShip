@@ -24,7 +24,7 @@ public class Game {
 		this.isPlaying = true;
 	}
 
-	public void updateCursorDimensions() {
+	public void updateCursorDimensions(int dimX, int dimY) {
 		
 	}
 	
