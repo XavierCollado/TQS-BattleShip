@@ -10,7 +10,7 @@ import game.Game;
 /**
  * 
  * @author xavier
- * @version 1.0
+ * @version 2.0
  */
 class GameTest {
 
@@ -23,7 +23,7 @@ class GameTest {
 		game.endGame();
 		
 		// Then
-		assertEquals(false, game.isPlaying());
+		assertFalse(game.isPlaying());
 	}
 
 }

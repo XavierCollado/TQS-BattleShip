@@ -3,7 +3,7 @@ package game;
 /**
  * 
  * @author xavier
- * @version 1.0
+ * @version 2.0
  *
  */
 public class Game {
@@ -33,11 +33,11 @@ public class Game {
 	}
 	
 	public void endGame() {
-		
+		this.isPlaying = false;
 	}
 	
 	public boolean isPlaying() {
-		return true;
+		return this.isPlaying;
 	}
 	
 	private void printMenuScreen() {
