@@ -22,7 +22,7 @@ public class PlayerCPU implements Player{
   private boolean aliveDestroyer;
   private boolean isWin;
   private Cursor cursor;
-  private String keyboard;
+
   public PlayerCPU(){
     this.boatsStatus = new BoatsStatus();
     this.cursor = new Cursor();
@@ -34,7 +34,7 @@ public class PlayerCPU implements Player{
     this.aliveCruiser = true;
     this.aliveSubmarine = true;
     this.aliveDestroyer = true;
-    this.keyboard = new String("");
+
   }
   @Override
   public String keyReleased(int posX,int posY,KeyEvent e) {
