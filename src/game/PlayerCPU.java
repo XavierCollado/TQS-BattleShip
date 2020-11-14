@@ -2,13 +2,10 @@ package game;
 import java.util.*;
 import java.io.*;
 
-import java.awt.event.KeyEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyListener;
-import java.lang.String;
+
 /**
  * @author desirée
- * @version 1.4
+ * @version 1.5
  */
 
 public class PlayerCPU implements Player{
@@ -22,78 +19,20 @@ public class PlayerCPU implements Player{
   private boolean aliveDestroyer;
   private boolean isWin;
   private Cursor cursor;
-
+  private Game game;
   public PlayerCPU(){
     this.boatsStatus = new BoatsStatus();
     this.cursor = new Cursor();
     this.board = new Board();
-    this.cursor = new Cursor();
     this.boatsCount = 0;
     this.aliveCarrier = true;
     this.aliveBattleship = true;
     this.aliveCruiser = true;
     this.aliveSubmarine = true;
     this.aliveDestroyer = true;
-
-  }
-  @Override
-  public String keyReleased(int posX,int posY,KeyEvent e) {
-    // New key press
-    int key = e.getKeyCode();
-    // If we press right
-    if (key == KeyEvent.VK_RIGHT) {
-      if (posX < 9) {
-        cursor.setPosX(++posX);
-      }
-    } else if (key == KeyEvent.VK_LEFT) {
-      if (posX > 0) {
-        cursor.setPosX(--posX);
-      }
-    }else if(key == KeyEvent.VK_DOWN){
-      if (posY > 0) {
-        cursor.setPosY(--posY);
-      }
-    }else if(key == KeyEvent.VK_UP){
-      if (posY < 9) {
-        cursor.setPosY(++posY);
-      }
-    }
-    else if(key == KeyEvent.VK_ENTER){
-      //Change!!!!
-      if (posY < 9) {
-        cursor.setPosY(++posY);
-      }
-    }
+    this.game = new Game();
   }
 
-  @Override
-  public void keyTyped(int posX,int posY,KeyEvent e) {
-    // New key press
-    int key = e.getKeyCode();
-    // If we press right
-    if (key == KeyEvent.VK_RIGHT) {
-      if (posX < 9) {
-        cursor.setPosX(++posX);
-      }
-    } else if (key == KeyEvent.VK_LEFT) {
-      if (posX > 0) {
-        cursor.setPosX(--posX);
-      }
-    }else if(key == KeyEvent.VK_DOWN){
-      if (posY > 0) {
-        cursor.setPosY(--posY);
-      }
-    }else if(key == KeyEvent.VK_UP){
-      if (posY < 9) {
-        cursor.setPosY(++posY);
-      }
-    }else if(key == KeyEvent.VK_ENTER){
-      //Change!!!!
-      if (posY < 9) {
-        cursor.setPosY(++posY);
-      }
-    }
-  }
   //It's necessary create Exception class!
   public void playTurn(int posX,int posY) throws Exception{
 
@@ -109,12 +48,8 @@ public class PlayerCPU implements Player{
     if (posY > 9) {
       throw new Exception("posX or posY out of board.");
     }
-    //Missing read arrows and enter.
-
-    //Condition ENTER_KEY:
-
-    //within the condition:
-    //We put the calls to the functions later.
+    this.checkWinCondition();
+    game.changePlayerTurn();
 
   }
   private void updateBoardCell(int posX,int posY,Cell cell) throws Exception{
