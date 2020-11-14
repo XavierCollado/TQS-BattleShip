@@ -8,7 +8,7 @@ import game.Cursor;
 /**
  * 
  * @author xavier
- * @version 2.0
+ * @version 3.0
  * 
  */
 class CursorTest {
@@ -95,6 +95,33 @@ class CursorTest {
 		
 		// Then
 		assertEquals((lenghtY-1), cursor.getPosY());
+	}
+	
+	@Test
+	void changeHorientation_fromHorizontalToVertical() {
+		// Given
+		int lenghtX = 3, lenghtY = 2;
+		Cursor cursor = new Cursor(lenghtX, lenghtY);
+				
+		// When
+		cursor.changeHorientation();
+				
+		// Then
+		assertEquals(false, cursor.isHorizontal());
+	}
+	
+	@Test
+	void changeHorientation_fromVerticalToHorizontal() {
+		// Given
+		int lenghtX = 3, lenghtY = 2;
+		Cursor cursor = new Cursor(lenghtX, lenghtY);
+		cursor.changeHorientation();
+		
+		// When
+		cursor.changeHorientation();
+				
+		// Then
+		assertEquals(true, cursor.isHorizontal());
 	}
 
 }
