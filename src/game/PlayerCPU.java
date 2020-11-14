@@ -1,9 +1,11 @@
 package game;
+import java.util.Scanner;
 
 /**
  * @author desirée
- * @version 1.0
+ * @version 1.1
  */
+//we should put Cursor cursor (we use posX, posY) and also Cell cell (we use cell) ??
 public class PlayerCPU implements Player{
   private BoatsStatus boatsStatus;
   private Board board;
@@ -13,9 +15,12 @@ public class PlayerCPU implements Player{
   private boolean aliveCruiser;
   private boolean aliveSubmarine;
   private boolean aliveDestroyer;
+  private Cursor cursor;
   public PlayerCPU(){
     this.boatsStatus = new BoatsStatus();
+    this.cursor = new Cursor();
     this.board = new Board();
+    this.cursor = new Cursor();
     this.boatsCount = 0;
     this.aliveCarrier = true;
     this.aliveBattleship = true;
@@ -23,14 +28,80 @@ public class PlayerCPU implements Player{
     this.aliveSubmarine = true;
     this.aliveDestroyer = true;
   }
-  public void playTurn(int posX,int posY){
+  public void playTurn(int posX,int posY,int torn){
+    if(torn == 0){
+      if(posX < 0){
+        throw new OutOfBoard("posX or posY out of board.");
+      }
+      if(posY < 0){
+        throw new OutOfBoard("posX or posY out of board.");
+      }
+      if(posX > 9){
+        throw new OutOfBoard("posX or posY out of board.");
+      }
+      if(posY > 9){
+        throw new OutOfBoard("posX or posY out of board.");
+      }
+      //Missing read arrows and enter.
+      //Loop where we look characters read.
+      //condition DOWN_KEY:
+
+      //within the condition:
+      if(posY>0){
+        cursor.setPosY(--posY);
+      }
+      //Condition UP_KEY:
+
+      //within the condition:
+      if(posY < 9){
+        cursor.setPosY(++posY);
+      }
+
+      //Condition LEFT_KEY:
+
+      //within the condition:
+      if(posX > 0){
+        cursor.setPosX(--posX);
+      }
+
+      //Condition RIGHT_KEY:
+
+      //within the condition:
+      if(posX < 9){
+        cursor.setPosX(++posX);
+      }
+      //Condition ENTER_KEY:
+
+      //within the condition:
+      //We put the calls to the functions later.
 
   }
   private void updateBoardCell(int posX,int posY,Cell cell){
-
+      if(posX < 0){
+        throw new OutOfBoard("posX or posY out of board.");
+      }
+      if(posY < 0){
+        throw new OutOfBoard("posX or posY out of board.");
+      }
+      if(posX > 9){
+        throw new OutOfBoard("posX or posY out of board.");
+      }
+      if(posY > 9){
+        throw new OutOfBoard("posX or posY out of board.");
+      }
+      if(posY < cell.length - 1){
+        if(posX < cell.length[posY] - 1){
+          //Missed thing but i don't understand this correctly.
+        }
+      }
   }
   private boolean checkWinCondition(){
 
+    boolean win = false;
+    if(boatsCount == 5){
+      win = true;
+    }
+    return win;
   }
   public boolean isCarrierAlive(){
     return aliveCarrier;
