@@ -24,7 +24,7 @@ public class Game {
 		this.turn = 0;
 		this.screen = 0;
 		this.isPlaying = true;
-		this.screenMessage = "║ Select a valid option                           ║\n"+ "║                                                 ║\n";
+		this.screenMessage = "║ Select a valid option                              ║\n"+ "║                                                    ║\n";
 		this.inpuntScanner = new Scanner(System.in);
 	}
 	
@@ -57,13 +57,13 @@ public class Game {
 		if(this.screen == 0) {
 			if(response.equals("1")) {
 				setSelectionScreen();
-				this.screenMessage = "║ You add a valid option (1)                      ║\n"+"║                                                 ║\n";
+				this.screenMessage = "║ You add a valid option (1)                         ║\n"+"║                                                    ║\n";
 			} else if (response.equals("2")) {
-				this.screenMessage = "║ BYE BYE :)                                      ║\n"+"║                                                 ║\n";
+				this.screenMessage = "║ BYE BYE :)                                         ║\n"+"║                                                    ║\n";
 				endGame();
 			}
 			else {
-				this.screenMessage = "║ Please add a valid option (just the number)     ║\n"+"║                                                 ║\n";
+				this.screenMessage = "║ Please add a valid option (just the number)        ║\n"+"║                                                    ║\n";
 			}
 		}
 	}
@@ -77,31 +77,31 @@ public class Game {
 	}
 	
 	private void printMenuScreen() {
-		System.out.print("╔═════════════════════════════════════════════════╗\n"
-				+ "║                                                 ║\n"
-				+ "║                                                 ║\n"
-				+ "║                   BATTLESHIPS                   ║\n"
-				+ "║                                                 ║\n"
-				+ "║                                                 ║\n"
-				+ "║                                                 ║\n"
-				+ "║                                                 ║\n"
-				+ "║                                                 ║\n"
-				+ "║                                                 ║\n"
-				+ "║                                                 ║\n"
-				+ "╠═════════════════════════════════════════════════╣\n"
-				+ "║                                                 ║\n"
-				+ "║  1) Single Player                               ║\n"
-				+ "║                                                 ║\n"
-				+ "║                                                 ║\n"
-				+ "║                                                 ║\n"
-				+ "║                                                 ║\n"
-				+ "║                                                 ║\n"
-				+ "║                                                 ║\n"
-				+ "║  2) Exit Game                                   ║\n"
-				+ "║                                                 ║\n"
-				+ "╠═════════════════════════════════════════════════╣\n"
+		System.out.print("╔════════════════════════════════════════════════════╗\n"
+				+ "║                                                    ║\n"
+				+ "║                                                    ║\n"
+				+ "║                   BATTLESHIPS                      ║\n"
+				+ "║                                                    ║\n"
+				+ "║                                                    ║\n"
+				+ "║                                                    ║\n"
+				+ "║                                                    ║\n"
+				+ "║                                                    ║\n"
+				+ "║                                                    ║\n"
+				+ "║                                                    ║\n"
+				+ "╠════════════════════════════════════════════════════╣\n"
+				+ "║                                                    ║\n"
+				+ "║  1) Single Player                                  ║\n"
+				+ "║                                                    ║\n"
+				+ "║                                                    ║\n"
+				+ "║                                                    ║\n"
+				+ "║                                                    ║\n"
+				+ "║                                                    ║\n"
+				+ "║                                                    ║\n"
+				+ "║  2) Exit Game                                      ║\n"
+				+ "║                                                    ║\n"
+				+ "╠════════════════════════════════════════════════════╣\n"
 				+ this.screenMessage
-				+ "╚═════════════════════════════════════════════════╝\n"
+				+ "╚════════════════════════════════════════════════════╝\n"
 				+ "");
 	}
 	
