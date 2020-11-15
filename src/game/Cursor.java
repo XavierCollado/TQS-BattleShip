@@ -26,6 +26,18 @@ public class Cursor {
 		
 	}
 	
+	public void updateDimensions(int newLenghtX, int newLenghtY) {
+		
+	}
+	
+	public int getLenghtX() {
+		return this.lenghtX;
+	}
+	
+	public int getLenghtY() {
+		return this.lenghtY;
+	}
+	
 	public int getPosX() {
 		return this.posX;
 	}

@@ -123,5 +123,19 @@ class CursorTest {
 		// Then
 		assertEquals(true, cursor.isHorizontal());
 	}
+	
+	@Test
+	void updateupdateDimensions() {
+		// Given
+		Cursor cursor = new Cursor(0,0);
+		int newLenghtX = 2, newLenghtY = 3; 
+		
+		// When
+		cursor.updateDimensions(newLenghtX, newLenghtY);
+		
+		// Then
+		assertEquals(newLenghtX, cursor.getLenghtX());
+		assertEquals(newLenghtX, cursor.getLenghtY());
+	}
 
 }
