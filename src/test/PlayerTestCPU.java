@@ -9,7 +9,7 @@ import game.Cell;
 /**
  *
  * @author desirée
- * @version 1.2
+ * @version 1.3
  *
  */
 class PlayerTestCPU {
@@ -20,13 +20,12 @@ class PlayerTestCPU {
 
     int posX = 3;
     int posY = 4;
-    int gameScreenId = 3;
     String type = "";
-
+    int gameScreenId = 3;
     PlayerCPU playerCPU = new PlayerCPU();
-
-    playerCPU.playTurn(posX, posY, gameScreenId) ;
-
+    //When
+    playerCPU.playTurn(posX, posY,gameScreenId);
+    //Then
     assertEquals(true,playerCPU.getBoard().getCell(posX,posY).ishit());
   }
 
@@ -37,8 +36,11 @@ class PlayerTestCPU {
     int posX = 3;
     int posY = 4;
     int gameScreenId = 3;
-    playerCPU.playTurn(posX, posY, gameScreenId);
+    //When
     playerCPU.getBoard().getCell(posX, posY).hit();
+    playerCPU.playTurn(posX, posY,gameScreenId);
+
+    //Then
     assertEquals(true,playerCPU.getBoard().getCell(posX,posY).ishit());
   }
   @Test
@@ -49,10 +51,10 @@ class PlayerTestCPU {
     int posY = 5;
 
     //When
-    //playerCPU.updateBoardCell(posX, posY, playerCPU.getBoard().getCell(posX, posY));
+    playerCPU.updateBoardCell(posX, posY, playerCPU.getBoard().getCell(posX, posY));
 
     //Then
-    //assertEquals(true,isHitCel);
+    assertEquals(true,playerCPU.getBoard().getCell(posX, posY).ishit());
   }
   @Test
   void TestUpdateBoardCelliHitAtFirst() {
@@ -63,10 +65,10 @@ class PlayerTestCPU {
     int posY = 5;
 
     //When
-    //playerCPU.updateBoardCell(posX, posY, board.getCell(posX, posY));
-    // boolean isHitCel = board.getCell(posX, posY).ishit();
+    playerCPU.getBoard().getCell(posX, posY).hit();
+    playerCPU.updateBoardCell(posX, posY, playerCPU.getBoard().getCell(posX, posY));
     //Then
-    //assertEquals(true,isHitCel);
+    assertEquals(true,playerCPU.getBoard().getCell(posX, posY).ishit());
   }
   @Test
   void TestCheckWinPositive(){
