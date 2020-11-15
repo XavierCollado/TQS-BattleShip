@@ -60,10 +60,11 @@ public class Game {
 		String response = input;
 		if(this.screen == 0) {
 			if(response.equals("1")) {
+				setSelectionScreen();
 				this.screenMessage = "║ You add a valid option (1)                      ║\n"+"║                                                 ║\n";
 			} else if (response.equals("2")) {
 				this.screenMessage = "║ BYE BYE :)                                      ║\n"+"║                                                 ║\n";
-				
+				endGame();
 			}
 			else {
 				this.screenMessage = "║ Please add a valid option (just the number)     ║\n"+"║                                                 ║\n";
@@ -110,5 +111,17 @@ public class Game {
 	
 	private void printBoardScreen() {
 		
+	}
+	
+	private void setMenuScreen() {
+		this.screen = 0;
+	}
+	
+	private void setSelectionScreen() {
+		this.screen = 1;
+	}
+	
+	private void setGameScreen() {
+		this.screen = 2;
 	}
 }
