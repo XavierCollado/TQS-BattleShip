@@ -49,10 +49,7 @@ public class PlayerHUM implements Player{
 
   }
   public void updateBoardCell(int posX,int posY,Cell cell) {
-    if(board.getCell(posX, posY).ishit() == false) {
-      this.playTurn(posX,posY, 2);
-      board.getCell(posX, posY).hit();
-    }
+
   }
   public boolean checkWinCondition(int boatsCount) {
     boolean win = false;
