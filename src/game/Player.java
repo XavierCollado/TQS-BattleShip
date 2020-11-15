@@ -15,4 +15,5 @@ public interface Player {
   boolean isSubmarineAlive();
   boolean isDestroyerAlive();
   String getCellType(int posX, int posY);
+  Board getBoard();
 }
