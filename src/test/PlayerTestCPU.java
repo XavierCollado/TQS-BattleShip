@@ -19,7 +19,7 @@ class PlayerTestCPU {
     //Given
 
     int posX = 3;
-    int posY = 4;
+    int posY = 5;
     String type = "";
     int gameScreenId = 3;
     PlayerCPU playerCPU = new PlayerCPU();
