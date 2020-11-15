@@ -4,9 +4,10 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 import game.PlayerCPU;
-
+import game.Board;
+import game.Cell;
 /**
- * 
+ *
  * @author desirée
  * @version 1.2
  *
@@ -14,81 +15,69 @@ import game.PlayerCPU;
 class PlayerTestCPU {
 
   @Test
-  public void TestException_posXBigger() throws Exception{
+  public void TestPlayTurnNotHit() {
     //Given
-    PlayerCPU playerCPU = new PlayerCPU();
-    int posX = 11;
-    int posY = 3;
-    int turn = 1;
 
-    //When
-    
-    //Then
-    assertThrows(Exception.class, () -> {
-    	playerCPU.playTurn(posX,posY);
-    });
-  }
-  
-  @Test
-  public void TestException_posYBigger() throws Exception{
-    //Given
-    PlayerCPU playerCPU = new PlayerCPU();
-    int posX = 7;
-    int posY = 15;
-    int turn = 1;
+    int posX = 3;
+    int posY = 4;
+    String type = "";
 
-    //When
-    
-    //Then
-    assertThrows(Exception.class, () -> {
-    	playerCPU.playTurn(posX,posY);
-    });
+    PlayerCPU playerCPU = new PlayerCPU();
+
+    playerCPU.playTurn(posX, posY);
+
+    assertEquals(true,playerCPU.getBoard().getCell(posX,posY).ishit());
   }
-  
+
   @Test
-  public void TestException_posXnegative() throws Exception{
+  public void TestPlayTurnHit() {
     //Given
     PlayerCPU playerCPU = new PlayerCPU();
-    int posX = -5;
+    int posX = 3;
+    int posY = 4;
+    playerCPU.playTurn(posX, posY);
+    playerCPU.getBoard().getCell(posX, posY).hit();
+    assertEquals(true,playerCPU.getBoard().getCell(posX,posY).ishit());
+  }
+  @Test
+  public void TestUpdateBoardCellisntHitAtFirst() {
+    //Given
+    PlayerCPU playerCPU = new PlayerCPU();
+    int posX = 4;
     int posY = 5;
-    int turn = 1;
 
     //When
-    
+    //playerCPU.updateBoardCell(posX, posY, playerCPU.getBoard().getCell(posX, posY));
+
     //Then
-    assertThrows(Exception.class, () -> {
-    	playerCPU.playTurn(posX,posY);
-    });
+    //assertEquals(true,isHitCel);
   }
-  
   @Test
-  public void TestException_posYnegative() throws Exception{
+  public void TestUpdateBoardCelliHitAtFirst() {
     //Given
     PlayerCPU playerCPU = new PlayerCPU();
-    int posX = 5;
-    int posY = -5;
-    int turn = 1;
+
+    int posX = 4;
+    int posY = 5;
 
     //When
-    
+    //playerCPU.updateBoardCell(posX, posY, board.getCell(posX, posY));
+    // boolean isHitCel = board.getCell(posX, posY).ishit();
     //Then
-    assertThrows(Exception.class, () -> {
-    	playerCPU.playTurn(posX,posY);
-    });
+    //assertEquals(true,isHitCel);
   }
-  
   @Test
   public void TestCheckWinPositive(){
     //Given
     PlayerCPU playerCPU = new PlayerCPU();
     int boatsCount = 5;
-    
-    //When
 
+    //When
+    boolean winner =  playerCPU.checkWinCondition(boatsCount);
     //Then
-    assertEquals(true,playerCPU.checkWinCondition());
+    assertEquals(true,winner);
   }
-  
+
   @Test
   public void TestCheckWinNegative(){
     //Given
@@ -96,9 +85,9 @@ class PlayerTestCPU {
     int boatsCount = 2;
 
     //When
-    
+    boolean winner = playerCPU.checkWinCondition(boatsCount);
     //Then
-    assertEquals(false,playerCPU.checkWinCondition());
+    assertEquals(false,winner);
   }
 
 }

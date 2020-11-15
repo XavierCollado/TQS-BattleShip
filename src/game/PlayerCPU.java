@@ -5,7 +5,7 @@ import java.io.*;
 
 /**
  * @author desirée
- * @version 1.5
+ * @version 1.6
  */
 
 public class PlayerCPU implements Player{
@@ -17,7 +17,7 @@ public class PlayerCPU implements Player{
   private boolean aliveSubmarine;
   private boolean aliveDestroyer;
   private boolean isWin;
-  
+
   public PlayerCPU(){
     this.board = new Board();
     this.boatsCount = 0;
@@ -27,44 +27,58 @@ public class PlayerCPU implements Player{
     this.aliveSubmarine = true;
     this.aliveDestroyer = true;
   }
-
-  //It's necessary create Exception class!
+  public Board getBoard() {
+    return board;
+  }
+  public int randomX() {
+    Random random = new Random();
+    int result = random.nextInt(9 - 0 + 1);
+    return result;
+  }
+  public int randomY() {
+    Random random = new Random();
+    int result = random.nextInt(9 - 0 + 1);
+    return result;
+  }
   public void playTurn(int posX,int posY){
-    this.checkWinCondition();
+
+    if(board.getCell(posX,posY).ishit()==false) {
+      board.getCell(posX,posY).hit();
+    }
+    this.checkWinCondition(boatsCount);
   }
-  
+
   public void updateBoardCell(int posX,int posY,Cell cell){
-      //if(posY < cell.length - 1){
-        //if(posX < cell.length[posY] - 1){
-          //Missed thing but i don't understand this correctly.
-        //}
-      //}
+    if(board.getCell(posX, posY).ishit() == false) {
+      this.playTurn(posX,posY);
+      board.getCell(posX, posY).hit();
+    }
   }
-  
-  public boolean checkWinCondition() {
+
+  public boolean checkWinCondition(int boatsCount) {
     boolean win = false;
     if(boatsCount == 5){
       win = true;
     }
     return win;
   }
-  
+
   public boolean isCarrierAlive(){
     return aliveCarrier;
   }
-  
+
   public boolean isBattleshipAlive(){
     return aliveBattleship;
   }
-  
+
   public boolean isCruiserAlive(){
     return aliveCruiser;
   }
-  
+
   public boolean isSubmarineAlive(){
     return aliveSubmarine;
   }
-  
+
   public boolean isDestroyerAlive(){
     return aliveDestroyer;
   }
