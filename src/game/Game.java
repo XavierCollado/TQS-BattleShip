@@ -5,7 +5,7 @@ import java.util.Scanner;
 /**
  * 
  * @author xavier
- * @version 2.0
+ * @version 3.0
  *
  */
 public class Game {
@@ -27,17 +27,13 @@ public class Game {
 		this.screenMessage = "║ Select a valid option                           ║\n"+ "║                                                 ║\n";
 		this.inpuntScanner = new Scanner(System.in);
 	}
-
-	public void updateCursorDimensions(int dimX, int dimY) {
-		
-	}
 	
 	public int getScreen() {
 		return this.screen;
 	}
 	
-	public void printScreen(int screem) {
-		switch(screen) {
+	public void printScreen(int screenId) {
+		switch(screenId) {
 			case 0:
 				this.printMenuScreen();
 				break;				
@@ -105,8 +101,11 @@ public class Game {
 		String response = input;
 		if(this.screen == 0) {
 			if(response.equals("1")) {
-				this.screenMessage = "║ You add a valid option :)                       ║\n"+"║                                                 ║\n";
-			} else {
+				this.screenMessage = "║ You add a valid option (1)                      ║\n"+"║                                                 ║\n";
+			} else if (response.equals("2")) {
+				this.screenMessage = "║ BYE BYE :)                                      ║\n"+"║                                                 ║\n";
+			}
+			else {
 				this.screenMessage = "║ Please add a valid option (just the number)     ║\n"+"║                                                 ║\n";
 			}
 		}
