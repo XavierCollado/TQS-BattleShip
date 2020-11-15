@@ -12,6 +12,7 @@ public class Main {
 		// Main game loop
 		while(game.isPlaying()) {
 			game.printScreen(game.getScreen());
+			game.readInput();
 		}
 	}
 
