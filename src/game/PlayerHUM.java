@@ -20,7 +20,7 @@ public class PlayerHUM implements Player{
   private boolean aliveSubmarine;
   private boolean aliveDestroyer;
   private boolean isWin;
-  private Game game;
+  
   public PlayerHUM(){
     this.board = new Board();
     this.boatsCount = 0;
@@ -29,12 +29,10 @@ public class PlayerHUM implements Player{
     this.aliveCruiser = true;
     this.aliveSubmarine = true;
     this.aliveDestroyer = true;
-    this.game = new Game();
   }
 
   //It's necessary create Exception class!
-  public void playTurn(int posX,int posY) {
-    int screen = game.getScreen();
+  public void playTurn(int posX,int posY, int screen) {
     if(screen == 0) {
 
     }
@@ -52,7 +50,7 @@ public class PlayerHUM implements Player{
   }
   public void updateBoardCell(int posX,int posY,Cell cell) {
     if(board.getCell(posX, posY).ishit() == false) {
-      this.playTurn(posX,posY);
+      this.playTurn(posX,posY, 2);
       board.getCell(posX, posY).hit();
     }
   }
@@ -79,4 +77,8 @@ public class PlayerHUM implements Player{
   public boolean isDestroyerAlive(){
     return aliveDestroyer;
   }
+
+	public String getCellType(int posX, int posY) {
+		return board.getCell(posX, posY).getType();
+	}
 }

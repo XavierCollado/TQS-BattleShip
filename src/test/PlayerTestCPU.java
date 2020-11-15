@@ -20,11 +20,12 @@ class PlayerTestCPU {
 
     int posX = 3;
     int posY = 4;
+    int gameScreenId = 3;
     String type = "";
 
     PlayerCPU playerCPU = new PlayerCPU();
 
-    playerCPU.playTurn(posX, posY);
+    playerCPU.playTurn(posX, posY, gameScreenId) ;
 
     assertEquals(true,playerCPU.getBoard().getCell(posX,posY).ishit());
   }
@@ -35,7 +36,8 @@ class PlayerTestCPU {
     PlayerCPU playerCPU = new PlayerCPU();
     int posX = 3;
     int posY = 4;
-    playerCPU.playTurn(posX, posY);
+    int gameScreenId = 3;
+    playerCPU.playTurn(posX, posY, gameScreenId);
     playerCPU.getBoard().getCell(posX, posY).hit();
     assertEquals(true,playerCPU.getBoard().getCell(posX,posY).ishit());
   }

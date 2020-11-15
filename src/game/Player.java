@@ -1,12 +1,12 @@
 package game;
 
 /**
- * @author desirée
+ * @author desirée & xavier
  * @version 1.3
  */
 
 public interface Player {
-  void playTurn(int posX,int posY);
+  void playTurn(int posX,int posY, int screen);
   void updateBoardCell(int posX,int posY,Cell cell);
   boolean checkWinCondition(int boatsCount);
   boolean isCarrierAlive();
@@ -14,4 +14,5 @@ public interface Player {
   boolean isCruiserAlive();
   boolean isSubmarineAlive();
   boolean isDestroyerAlive();
+  String getCellType(int posX, int posY);
 }

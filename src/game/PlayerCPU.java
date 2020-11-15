@@ -40,7 +40,7 @@ public class PlayerCPU implements Player{
     int result = random.nextInt(9 - 0 + 1);
     return result;
   }
-  public void playTurn(int posX,int posY){
+  public void playTurn(int posX,int posY, int screen){
 
     if(board.getCell(posX,posY).ishit()==false) {
       board.getCell(posX,posY).hit();
@@ -50,7 +50,7 @@ public class PlayerCPU implements Player{
 
   public void updateBoardCell(int posX,int posY,Cell cell){
     if(board.getCell(posX, posY).ishit() == false) {
-      this.playTurn(posX,posY);
+      this.playTurn(posX,posY, 2);
       board.getCell(posX, posY).hit();
     }
   }
@@ -82,4 +82,8 @@ public class PlayerCPU implements Player{
   public boolean isDestroyerAlive(){
     return aliveDestroyer;
   }
+  
+	public String getCellType(int posX, int posY) {
+		return board.getCell(posX, posY).getType();
+	}
 }
