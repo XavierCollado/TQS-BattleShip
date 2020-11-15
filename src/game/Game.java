@@ -47,8 +47,28 @@ public class Game {
 		}
 	}
 	
-	public void endGame() {
+	private void endGame() {
 		this.isPlaying = false;
+	}
+
+	public String readInput() {
+		String input = inpuntScanner.nextLine();
+		return input;
+	}
+	
+	public void applyAction(String input) {
+		String response = input;
+		if(this.screen == 0) {
+			if(response.equals("1")) {
+				this.screenMessage = "║ You add a valid option (1)                      ║\n"+"║                                                 ║\n";
+			} else if (response.equals("2")) {
+				this.screenMessage = "║ BYE BYE :)                                      ║\n"+"║                                                 ║\n";
+				
+			}
+			else {
+				this.screenMessage = "║ Please add a valid option (just the number)     ║\n"+"║                                                 ║\n";
+			}
+		}
 	}
 	
 	public boolean isPlaying() {
@@ -90,24 +110,5 @@ public class Game {
 	
 	private void printBoardScreen() {
 		
-	}
-	
-	public void readInput() {
-		String s = inpuntScanner.nextLine();
-		applyAction(s);
-	}
-	
-	private void applyAction(String input) {
-		String response = input;
-		if(this.screen == 0) {
-			if(response.equals("1")) {
-				this.screenMessage = "║ You add a valid option (1)                      ║\n"+"║                                                 ║\n";
-			} else if (response.equals("2")) {
-				this.screenMessage = "║ BYE BYE :)                                      ║\n"+"║                                                 ║\n";
-			}
-			else {
-				this.screenMessage = "║ Please add a valid option (just the number)     ║\n"+"║                                                 ║\n";
-			}
-		}
 	}
 }
