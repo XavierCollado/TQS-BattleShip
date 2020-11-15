@@ -8,7 +8,7 @@ import game.Cursor;
 /**
  * 
  * @author xavier
- * @version 4.0
+ * @version 5.0
  * 
  */
 class CursorTest {
@@ -142,10 +142,10 @@ class CursorTest {
 	void updateupdateDimensions_newScrenIsSelectionScreen() {
 		// Given
 		Cursor cursor = new Cursor(0, 0);
-		int menuScreenId = 0, menuScreenLenghtX = 10, menuScreenLenghtY = 10; 
+		int selectionScreenId = 1, menuScreenLenghtX = 10, menuScreenLenghtY = 10; 
 		
 		// When
-		cursor.updateDimensions(menuScreenId);
+		cursor.updateDimensions(selectionScreenId);
 		
 		// Then
 		assertEquals(menuScreenLenghtX, cursor.getLenghtX());
@@ -156,10 +156,10 @@ class CursorTest {
 	void updateupdateDimensions_newScrenIsGameScreen() {
 		// Given
 		Cursor cursor = new Cursor(0, 0);
-		int menuScreenId = 0, menuScreenLenghtX = 10, menuScreenLenghtY = 10; 
+		int gameScreenId = 2, menuScreenLenghtX = 10, menuScreenLenghtY = 10; 
 		
 		// When
-		cursor.updateDimensions(menuScreenId);
+		cursor.updateDimensions(gameScreenId);
 		
 		// Then
 		assertEquals(menuScreenLenghtX, cursor.getLenghtX());
@@ -169,7 +169,9 @@ class CursorTest {
 	@Test
 	void updateupdateDimensions_WhenWeChangeTheScreenWeSetTheCursorPositionToZero() {
 		// Given
-		Cursor cursor = new Cursor(0, 0);
+		Cursor cursor = new Cursor(2, 2);
+		cursor.setPosX(1);
+		cursor.setPosY(1);
 		int menuScreenId = 0; 
 		
 		// When

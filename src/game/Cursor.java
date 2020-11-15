@@ -4,7 +4,7 @@ package game;
 /**
  * 
  * @author xavier
- * @version 4.0
+ * @version 5.0
  * 
  */
 public class Cursor {
@@ -25,7 +25,17 @@ public class Cursor {
 	}
 	
 	public void updateDimensions(int newScreen) {
-		
+		if(newScreen == 0) {
+			this.lenghtX = 1;
+			this.lenghtY = 2;
+			this.posX = 0;
+			this.posY = 0;
+		} else if((newScreen == 1) || (newScreen == 2)) {
+			this.lenghtX = 10;
+			this.lenghtY = 10;
+			this.posX = 0;
+			this.posY = 0;
+		}
 	}
 	
 	public int getLenghtX() {
