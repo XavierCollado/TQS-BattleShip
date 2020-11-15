@@ -2,7 +2,7 @@ package game;
 
 /**
  * @autor desirée
- * @version 1.0
+ * @version 1.1
  */
 public class Board{
   private Cell cells[][];
