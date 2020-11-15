@@ -15,7 +15,7 @@ import game.Cell;
  */
 public class BoardTest {
 	@Test
-	public void TestBoardUpdateCellInsideLoop() {
+	void TestBoardUpdateCellInsideLoop() {
 		Board board = new Board();
 		int posX = 0;
 		int posY = 4;
@@ -26,7 +26,7 @@ public class BoardTest {
 	}
 
 	@Test
-	public void TestBoardUpdateCellOnlyZeroTimeExternLoop() {
+	void TestBoardUpdateCellOnlyZeroTimeExternLoop() {
 		Board board = new Board();
 		int posX = 10;
 		int posY = 4;
@@ -38,7 +38,7 @@ public class BoardTest {
 
 	}
 	@Test
-	public void TestBoardUpdateCellOnlyTwoTimeExternLoop() {
+	void TestBoardUpdateCellOnlyTwoTimeExternLoop() {
 		Board board = new Board();
 		int posX = 1;
 		int posY = 2;
@@ -48,7 +48,7 @@ public class BoardTest {
 		assertThat(c, is(board.getCell(posX,posY)));
 	}
 	@Test
-	public void TestBoardUpdateCellSeveralTimeExternLoop() {
+	void TestBoardUpdateCellSeveralTimeExternLoop() {
 		Board board = new Board();
 		int posX = 3;
 		int posY = 3;
@@ -58,7 +58,7 @@ public class BoardTest {
 		assertThat(c, is(board.getCell(posX,posY)));
 	}
 	@Test
-	public void TestBoardUpdateCellAllTimeMinusOneTimeExternLoop() {
+	void TestBoardUpdateCellAllTimeMinusOneTimeExternLoop() {
 		Board board = new Board();
 		int posX = 8;
 		int posY = 4;
@@ -68,7 +68,7 @@ public class BoardTest {
 		assertThat(c, is(board.getCell(posX,posY)));
 	}
 	@Test
-	public void TestBoardUpdateCellAllExternLoop() {
+	void TestBoardUpdateCellAllExternLoop() {
 		Board board = new Board();
 		int posX = 9;
 		int posY = 4;

@@ -15,7 +15,7 @@ import game.Cell;
 class PlayerTestCPU {
 
   @Test
-  public void TestPlayTurnNotHit() {
+  void TestPlayTurnNotHit() {
     //Given
 
     int posX = 3;
@@ -31,7 +31,7 @@ class PlayerTestCPU {
   }
 
   @Test
-  public void TestPlayTurnHit() {
+  void TestPlayTurnHit() {
     //Given
     PlayerCPU playerCPU = new PlayerCPU();
     int posX = 3;
@@ -42,7 +42,7 @@ class PlayerTestCPU {
     assertEquals(true,playerCPU.getBoard().getCell(posX,posY).ishit());
   }
   @Test
-  public void TestUpdateBoardCellisntHitAtFirst() {
+  void TestUpdateBoardCellisntHitAtFirst() {
     //Given
     PlayerCPU playerCPU = new PlayerCPU();
     int posX = 4;
@@ -55,7 +55,7 @@ class PlayerTestCPU {
     //assertEquals(true,isHitCel);
   }
   @Test
-  public void TestUpdateBoardCelliHitAtFirst() {
+  void TestUpdateBoardCelliHitAtFirst() {
     //Given
     PlayerCPU playerCPU = new PlayerCPU();
 
@@ -69,7 +69,7 @@ class PlayerTestCPU {
     //assertEquals(true,isHitCel);
   }
   @Test
-  public void TestCheckWinPositive(){
+  void TestCheckWinPositive(){
     //Given
     PlayerCPU playerCPU = new PlayerCPU();
     int boatsCount = 5;
@@ -81,7 +81,7 @@ class PlayerTestCPU {
   }
 
   @Test
-  public void TestCheckWinNegative(){
+  void TestCheckWinNegative(){
     //Given
     PlayerCPU playerCPU = new PlayerCPU();
     int boatsCount = 2;

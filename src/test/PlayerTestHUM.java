@@ -15,7 +15,7 @@ import game.PlayerHUM;
  */
 class PlayerTestHUM {
   @Test
-  public void TestCheckWinPositive(){
+  void TestCheckWinPositive(){
     //Given
     PlayerCPU playerCPU = new PlayerCPU();
     int boatsCount = 5;
@@ -27,7 +27,7 @@ class PlayerTestHUM {
   }
 
   @Test
-  public void TestCheckWinNegative(){
+  void TestCheckWinNegative(){
     //Given
     PlayerCPU playerCPU = new PlayerCPU();
     int boatsCount = 2;
