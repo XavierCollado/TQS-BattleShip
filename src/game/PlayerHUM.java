@@ -8,7 +8,7 @@ import java.lang.String;
 
 /**
  * @author desirée
- * @version 1.2
+ * @version 1.3
  */
 
 public class PlayerHUM implements Player{
@@ -30,7 +30,9 @@ public class PlayerHUM implements Player{
     this.aliveSubmarine = true;
     this.aliveDestroyer = true;
   }
-
+  public Board getBoard() {
+    return board;
+  }
   //It's necessary create Exception class!
   public void playTurn(int posX,int posY, int screen) {
     if(screen == 0) {
@@ -49,7 +51,10 @@ public class PlayerHUM implements Player{
 
   }
   public void updateBoardCell(int posX,int posY,Cell cell) {
-
+    if(board.getCell(posX, posY).ishit() == false) {
+      this.playTurn(posX,posY, 2);
+      board.getCell(posX, posY).hit();
+    }
   }
   public boolean checkWinCondition(int boatsCount) {
     boolean win = false;
