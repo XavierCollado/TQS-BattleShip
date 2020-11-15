@@ -14,7 +14,6 @@ public class Cursor {
 	private int lenghtX;
 	private int lenghtY;
 	private boolean isHorizontal;
-	private int screen;
 	
 	public Cursor(int lenghtX, int lenghtY) {
 		this.lenghtX = lenghtX;
@@ -22,11 +21,10 @@ public class Cursor {
 		this.posX = 0;
 		this.posY = 0;
 		this.isHorizontal = true;
-		this.screen = 0;
 		
 	}
 	
-	public void updateDimensions(int newLenghtX, int newLenghtY) {
+	public void updateDimensions(int newScreen) {
 		
 	}
 	

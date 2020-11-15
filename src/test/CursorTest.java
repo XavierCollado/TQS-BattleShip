@@ -125,17 +125,59 @@ class CursorTest {
 	}
 	
 	@Test
-	void updateupdateDimensions() {
+	void updateupdateDimensions_newScrenIsMenuScreen() {
 		// Given
-		Cursor cursor = new Cursor(0,0);
-		int newLenghtX = 2, newLenghtY = 3; 
+		Cursor cursor = new Cursor(0, 0);
+		int menuScreenId = 0, menuScreenLenghtX = 1, menuScreenLenghtY = 2; 
 		
 		// When
-		cursor.updateDimensions(newLenghtX, newLenghtY);
+		cursor.updateDimensions(menuScreenId);
 		
 		// Then
-		assertEquals(newLenghtX, cursor.getLenghtX());
-		assertEquals(newLenghtX, cursor.getLenghtY());
+		assertEquals(menuScreenLenghtX, cursor.getLenghtX());
+		assertEquals(menuScreenLenghtY, cursor.getLenghtY());
+	}
+	
+	@Test
+	void updateupdateDimensions_newScrenIsSelectionScreen() {
+		// Given
+		Cursor cursor = new Cursor(0, 0);
+		int menuScreenId = 0, menuScreenLenghtX = 10, menuScreenLenghtY = 10; 
+		
+		// When
+		cursor.updateDimensions(menuScreenId);
+		
+		// Then
+		assertEquals(menuScreenLenghtX, cursor.getLenghtX());
+		assertEquals(menuScreenLenghtY, cursor.getLenghtY());
+	}
+	
+	@Test
+	void updateupdateDimensions_newScrenIsGameScreen() {
+		// Given
+		Cursor cursor = new Cursor(0, 0);
+		int menuScreenId = 0, menuScreenLenghtX = 10, menuScreenLenghtY = 10; 
+		
+		// When
+		cursor.updateDimensions(menuScreenId);
+		
+		// Then
+		assertEquals(menuScreenLenghtX, cursor.getLenghtX());
+		assertEquals(menuScreenLenghtY, cursor.getLenghtY());
+	}
+	
+	@Test
+	void updateupdateDimensions_WhenWeChangeTheScreenWeSetTheCursorPositionToZero() {
+		// Given
+		Cursor cursor = new Cursor(0, 0);
+		int menuScreenId = 0; 
+		
+		// When
+		cursor.updateDimensions(menuScreenId);
+		
+		// Then
+		assertEquals(0, cursor.getPosX());
+		assertEquals(0, cursor.getPosY());
 	}
 
 }
