@@ -46,10 +46,6 @@ public class Game {
 			default:
 		}
 	}
-	
-	private void endGame() {
-		this.isPlaying = false;
-	}
 
 	public String readInput() {
 		String input = inpuntScanner.nextLine();
@@ -74,6 +70,10 @@ public class Game {
 	
 	public boolean isPlaying() {
 		return this.isPlaying;
+	}
+	
+	private void endGame() {
+		this.isPlaying = false;
 	}
 	
 	private void printMenuScreen() {
@@ -121,7 +121,7 @@ public class Game {
 		this.screen = 1;
 	}
 	
-	private void setGameScreen() {
+	private void setBoardScreen() {
 		this.screen = 2;
 	}
 }
