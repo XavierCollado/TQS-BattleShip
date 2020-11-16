@@ -36,9 +36,7 @@ public class PlayerHUM implements Player{
   }
   
   public void playTurn(int posX,int posY) {
-	  if(board.getCell(posX,posY).ishit()==false) {
-	      board.getCell(posX,posY).hit();
-	  }
+	  enemyBoard.getCell(posX,posY).hit();
   }
   
   public void updateBoardCell(int posX,int posY,Cell cell) {

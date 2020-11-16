@@ -26,7 +26,7 @@ class PlayerTestCPU {
     //When
     playerCPU.playTurn(posX, posY);
     //Then
-    assertEquals(true,playerCPU.getBoard().getCell(posX,posY).ishit());
+    assertEquals(true,playerCPU.getEnemyBoard().getCell(posX,posY).ishit());
   }
 
   @Test
@@ -40,7 +40,7 @@ class PlayerTestCPU {
     playerCPU.playTurn(posX, posY);
 
     //Then
-    assertEquals(true,playerCPU.getBoard().getCell(posX,posY).ishit());
+    assertEquals(true,playerCPU.getEnemyBoard().getCell(posX,posY).ishit());
   }
   
   @Test

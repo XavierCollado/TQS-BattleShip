@@ -59,10 +59,12 @@ public class PlayerCPU implements Player{
     return result;
   }
   
+  public Board getEnemyBoard() {
+	  return this.enemyBoard;
+  }
+  
   public void playTurn(int posX,int posY){
-    if(board.getCell(posX,posY).ishit()==false) {
-      board.getCell(posX,posY).hit();
-    }
+	  enemyBoard.getCell(posX,posY).hit();
   }
 
   public void updateBoardCell(int posX,int posY,Cell cell){
