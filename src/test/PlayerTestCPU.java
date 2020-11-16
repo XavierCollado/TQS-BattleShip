@@ -94,7 +94,7 @@ class PlayerTestCPU {
     int boatsCount = 5;
 
     //When
-    boolean winner =  playerCPU.checkWinCondition(boatsCount);
+    boolean winner =  playerCPU.checkWinCondition();
     //Then
     assertEquals(true,winner);
   }
@@ -106,7 +106,7 @@ class PlayerTestCPU {
     int boatsCount = 2;
 
     //When
-    boolean winner = playerCPU.checkWinCondition(boatsCount);
+    boolean winner = playerCPU.checkWinCondition();
     //Then
     assertEquals(false,winner);
   }
@@ -117,7 +117,7 @@ class PlayerTestCPU {
     int boatsCount = 7;
 
     //When
-    boolean winner = playerCPU.checkWinCondition(boatsCount);
+    boolean winner = playerCPU.checkWinCondition();
     //Then
     assertEquals(false,winner);
   }

@@ -8,7 +8,7 @@ package game;
 public interface Player {
   void playTurn(int posX,int posY);
   void updateBoardCell(int posX,int posY,Cell cell);
-  boolean checkWinCondition(int boatsCount);
+  boolean checkWinCondition();
   boolean isCarrierAlive();
   boolean isBattleshipAlive();
   boolean isCruiserAlive();

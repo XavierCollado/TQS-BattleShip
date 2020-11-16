@@ -23,7 +23,7 @@ class PlayerTestHUM {
     int boatsCount = 5;
 
     //When
-    boolean winner =  playerHUM.checkWinCondition(boatsCount);
+    boolean winner =  playerHUM.checkWinCondition();
     //Then
     assertEquals(true,winner);
   }
@@ -35,7 +35,7 @@ class PlayerTestHUM {
     int boatsCount = 2;
 
     //When
-    boolean winner = playerHUM.checkWinCondition(boatsCount);
+    boolean winner = playerHUM.checkWinCondition();
     //Then
     assertEquals(false,winner);
   }
@@ -47,7 +47,7 @@ class PlayerTestHUM {
     int boatsCount = 2;
 
     //When
-    boolean winner = playerHUM.checkWinCondition(boatsCount);
+    boolean winner = playerHUM.checkWinCondition();
     //Then
     assertEquals(false,winner);
   }

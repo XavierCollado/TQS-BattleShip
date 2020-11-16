@@ -63,6 +63,11 @@ public class Game {
 	public void applyAction(String input) {
 		String response = input;
 		
+		//Last Screen Winner
+		if(this.screen == 3) {
+			winnerScreenACtion();
+		}	
+		
 		//Actions for BoardScreen
 		if(this.screen == 2) {
 			boardScreenAction(response);
@@ -158,11 +163,11 @@ public class Game {
 				+ "║     1  2  3  4  5  6  7  8  9  10 ║                ║\n"
 				+ "║ 1  "+getBoardPlayerCPURow(0)+" ║ ENEMY BOARD    ║\n"
 				+ "║ 2  "+getBoardPlayerCPURow(1)+" ║                ║\n"
-				+ "║ 3  "+getBoardPlayerCPURow(2)+" ║ Carrier (5)    ║\n"
-				+ "║ 4  "+getBoardPlayerCPURow(3)+" ║ Battleship (4) ║\n"
-				+ "║ 5  "+getBoardPlayerCPURow(4)+" ║ Cruiser (3)    ║\n"
-				+ "║ 6  "+getBoardPlayerCPURow(5)+" ║ Submarine (2)  ║\n"
-				+ "║ 7  "+getBoardPlayerCPURow(6)+" ║ Destroyer (2)  ║\n"
+				+ "║ 3  "+getBoardPlayerCPURow(2)+" ║ Carrier ("+getBoatsStatusInfo_Carrier(2)+")    ║\n"
+				+ "║ 4  "+getBoardPlayerCPURow(3)+" ║ Battleship ("+getBoatsStatusInfo_Battleship(2)+") ║\n"
+				+ "║ 5  "+getBoardPlayerCPURow(4)+" ║ Cruiser ("+getBoatsStatusInfo_Cruiser(2)+")    ║\n"
+				+ "║ 6  "+getBoardPlayerCPURow(5)+" ║ Submarine ("+getBoatsStatusInfo_Submarine(2)+")  ║\n"
+				+ "║ 7  "+getBoardPlayerCPURow(6)+" ║ Destroyer ("+getBoatsStatusInfo_Destroyer(2)+")  ║\n"
 				+ "║ 8  "+getBoardPlayerCPURow(7)+" ║                ║\n"
 				+ "║ 9  "+getBoardPlayerCPURow(8)+" ║                ║\n"
 				+ "║ 10 "+getBoardPlayerCPURow(9)+" ║                ║\n"
@@ -170,11 +175,11 @@ public class Game {
 				+ "║     1  2  3  4  5  6  7  8  9  10 ║                ║\n"
 				+ "║ 1  "+getBoardPlayerHUMRow(0)+" ║ PLAYER BOARD   ║\n"
 				+ "║ 2  "+getBoardPlayerHUMRow(1)+" ║                ║\n"
-				+ "║ 3  "+getBoardPlayerHUMRow(2)+" ║ Carrier (5)    ║\n"
-				+ "║ 4  "+getBoardPlayerHUMRow(3)+" ║ Battleship (4) ║\n"
-				+ "║ 5  "+getBoardPlayerHUMRow(4)+" ║ Cruiser (3)    ║\n"
-				+ "║ 6  "+getBoardPlayerHUMRow(5)+" ║ Submarine (2)  ║\n"
-				+ "║ 7  "+getBoardPlayerHUMRow(6)+" ║ Destroyer (2)  ║\n"
+				+ "║ 3  "+getBoardPlayerHUMRow(2)+" ║ Carrier ("+getBoatsStatusInfo_Carrier(1)+")    ║\n"
+				+ "║ 4  "+getBoardPlayerHUMRow(3)+" ║ Battleship ("+getBoatsStatusInfo_Battleship(1)+") ║\n"
+				+ "║ 5  "+getBoardPlayerHUMRow(4)+" ║ Cruiser ("+getBoatsStatusInfo_Cruiser(1)+")    ║\n"
+				+ "║ 6  "+getBoardPlayerHUMRow(5)+" ║ Submarine ("+getBoatsStatusInfo_Submarine(1)+")  ║\n"
+				+ "║ 7  "+getBoardPlayerHUMRow(6)+" ║ Destroyer ("+getBoatsStatusInfo_Destroyer(1)+")  ║\n"
 				+ "║ 8  "+getBoardPlayerHUMRow(7)+" ║                ║\n"
 				+ "║ 9  "+getBoardPlayerHUMRow(8)+" ║                ║\n"
 				+ "║ 10 "+getBoardPlayerHUMRow(9)+" ║                ║\n"
@@ -194,6 +199,10 @@ public class Game {
 	
 	private void setBoardScreen() {
 		this.screen = 2;
+	}
+	
+	private void setWinnersScreen() {
+		this.screen = 3;
 	}
 	
 	private String getSelectionRow(int matrixPosY) {
@@ -315,6 +324,9 @@ public class Game {
 			posY = Integer.parseInt(params[1])-1;
 			if(!player2.getEnemyBoard().getCell(posX, posY).ishit()) {
 				player1.playTurn(posX, posY);
+				if(player1.checkWinCondition()){
+					setWinnersScreen();
+				}
 				this.playerHUMTurn = false;
 			}
 		} else {
@@ -326,8 +338,28 @@ public class Game {
 				}
 			}
 			player2.playTurn(posX, posY);
+			if(player2.checkWinCondition()){
+				setWinnersScreen();
+			}
 			this.playerHUMTurn = true;
 		}
+	}
+	
+	private void winnerScreenACtion() {
+		String winner = "";
+		if(player1.checkWinCondition()) {
+			winner =  "║                     YOU WIN!                       ║\n";
+		}
+		if(player2.checkWinCondition()) {
+			winner =  "║                    YOU LOSE!                       ║\n";
+		}
+		
+		System.out.println("╔════════════════════════════════════════════════════╗\n"
+				+ "║                                                    ║\n"
+				+ winner
+				+ "║                                                    ║\n"
+				+ "╚════════════════════════════════════════════════════╝");
+		this.endGame();
 	}
 	
 	private void insertShipSelectionScreen(int boardPosX, int boardPosY, char orientation, int boatCountId) {
@@ -496,4 +528,73 @@ public class Game {
 		}
 	}
 	
+	private char getBoatsStatusInfo_Carrier(int player) {
+		char boatState = 'X';
+		if(player == 1) {
+			if(player1.isCarrierAlive()) {
+				boatState = '5';
+			} 
+		} else {
+			if(player2.isCarrierAlive()) {
+				boatState = '5';
+			}
+		}
+		return boatState;
+	}
+	
+	private char getBoatsStatusInfo_Battleship(int player) {
+		char boatState = 'X';
+		if(player == 1) {
+			if(player1.isBattleshipAlive()) {
+				boatState = '4';
+			} 
+		} else {
+			if(player2.isBattleshipAlive()) {
+				boatState = '4';
+			}
+		}
+		return boatState;
+	}
+	
+	private char getBoatsStatusInfo_Cruiser(int player) {
+		char boatState = 'X';
+		if(player == 1) {
+			if(player1.isCruiserAlive()) {
+				boatState = '3';
+			} 
+		} else {
+			if(player2.isCruiserAlive()) {
+				boatState = '3';
+			}
+		}
+		return boatState;
+	}
+	
+	private char getBoatsStatusInfo_Submarine(int player) {
+		char boatState = 'X';
+		if(player == 1) {
+			if(player1.isSubmarineAlive()) {
+				boatState = '2';
+			} 
+		} else {
+			if(player2.isSubmarineAlive()) {
+				boatState = '2';
+			}
+		}
+		return boatState;
+	}
+	
+	private char getBoatsStatusInfo_Destroyer(int player) {
+		char boatState = '2';
+		if(player == 1) {
+			if(player1.isDestroyerAlive()) {
+				boatState = '2';
+			} 
+		} else {
+			if(player2.isDestroyerAlive()) {
+				boatState = '2';
+			}
+		}
+		return boatState;
+	}
 }

@@ -47,28 +47,120 @@ public class PlayerHUM implements Player{
     board.updateCell(posX, posY, cell);
   }
   
-  public boolean checkWinCondition(int boatsCount) {
-    boolean win = false;
-    if(boatsCount == 5){
-      win = true;
-    }
-    return win;
-  }
+  public boolean checkWinCondition() {
+	    
+	    return (!isEnemyCarrierAlive() && !isEnemyBattleshipAlive() && !isEnemyCruiserAlive() && !isEnemySubmarineAlive() && !isEnemyDestroyerAlive());
+	  }
 
+	  public boolean isEnemyCarrierAlive(){
+			boolean isAlive = false;
+			for(int i = 0; i<10; i++) {
+				for(int j = 0; j<10; j++) {
+					if(!(this.getEnemyBoard().getCell(i, j).ishit()) && (this.getCellType(i, j)==CellConstants.CARRIER_TYPE)) {
+						isAlive = true;
+					}
+				}
+			}
+		    return isAlive;
+	  }
+	  public boolean isEnemyBattleshipAlive(){
+		  boolean isAlive = false;
+			for(int i = 0; i<10; i++) {
+				for(int j = 0; j<10; j++) {
+					if(!(this.getEnemyBoard().getCell(i, j).ishit()) && (this.getCellType(i, j)==CellConstants.BATTLESHIP_TYPE)) {
+						isAlive = true;
+					}
+				}
+			}
+		    return isAlive;
+	  }
+	  public boolean isEnemyCruiserAlive(){
+		  boolean isAlive = false;
+			for(int i = 0; i<10; i++) {
+				for(int j = 0; j<10; j++) {
+					if(!(this.getEnemyBoard().getCell(i, j).ishit()) && (this.getCellType(i, j)==CellConstants.CRUISER_TYPE)) {
+						isAlive = true;
+					}
+				}
+			}
+		    return isAlive;
+	  }
+	  public boolean isEnemySubmarineAlive(){
+		  boolean isAlive = false;
+			for(int i = 0; i<10; i++) {
+				for(int j = 0; j<10; j++) {
+					if(!(this.getEnemyBoard().getCell(i, j).ishit()) && (this.getCellType(i, j)==CellConstants.SUBMARINE_TYPE)) {
+						isAlive = true;
+					}
+				}
+			}
+		    return isAlive;
+	  }
+	  public boolean isEnemyDestroyerAlive(){
+		  boolean isAlive = false;
+			for(int i = 0; i<10; i++) {
+				for(int j = 0; j<10; j++) {
+					if(!(this.getEnemyBoard().getCell(i, j).ishit()) && (this.getCellType(i, j)==CellConstants.DESTROYER_TYPE)) {
+						isAlive = true;
+					}
+				}
+			}
+		    return isAlive;
+	  }
   public boolean isCarrierAlive(){
-    return aliveCarrier;
+		boolean isAlive = false;
+		for(int i = 0; i<10; i++) {
+			for(int j = 0; j<10; j++) {
+				if(!(this.getBoard().getCell(i, j).ishit()) && (this.getCellType(i, j)==CellConstants.CARRIER_TYPE)) {
+					isAlive = true;
+				}
+			}
+		}
+	    return isAlive;
   }
   public boolean isBattleshipAlive(){
-    return aliveBattleship;
+	  boolean isAlive = false;
+		for(int i = 0; i<10; i++) {
+			for(int j = 0; j<10; j++) {
+				if(!(this.getBoard().getCell(i, j).ishit()) && (this.getCellType(i, j)==CellConstants.BATTLESHIP_TYPE)) {
+					isAlive = true;
+				}
+			}
+		}
+	    return isAlive;
   }
   public boolean isCruiserAlive(){
-    return aliveCruiser;
+	  boolean isAlive = false;
+		for(int i = 0; i<10; i++) {
+			for(int j = 0; j<10; j++) {
+				if(!(this.getBoard().getCell(i, j).ishit()) && (this.getCellType(i, j)==CellConstants.CRUISER_TYPE)) {
+					isAlive = true;
+				}
+			}
+		}
+	    return isAlive;
   }
   public boolean isSubmarineAlive(){
-    return aliveSubmarine;
+	  boolean isAlive = false;
+		for(int i = 0; i<10; i++) {
+			for(int j = 0; j<10; j++) {
+				if(!(this.getBoard().getCell(i, j).ishit()) && (this.getCellType(i, j)==CellConstants.SUBMARINE_TYPE)) {
+					isAlive = true;
+				}
+			}
+		}
+	    return isAlive;
   }
   public boolean isDestroyerAlive(){
-    return aliveDestroyer;
+	  boolean isAlive = false;
+		for(int i = 0; i<10; i++) {
+			for(int j = 0; j<10; j++) {
+				if(!(this.getBoard().getCell(i, j).ishit()) && (this.getCellType(i, j)==CellConstants.DESTROYER_TYPE)) {
+					isAlive = true;
+				}
+			}
+		}
+	    return isAlive;
   }
 
   public String getCellType(int posX, int posY) {
