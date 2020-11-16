@@ -152,16 +152,16 @@ public class Game {
 	private void printBoardScreen() {
 		System.out.print("╔═══════════════════════════════════╦════════════════╗\n"
 				+ "║     1  2  3  4  5  6  7  8  9  10 ║                ║\n"
-				+ "║ 1  [_][_][_][_][_][_][_][_][_][_] ║ ENEMY BOARD    ║\n"
-				+ "║ 2  [_][_][_][_][_][_][_][_][_][_] ║                ║\n"
-				+ "║ 3  [_][_][_][_][_][_][_][_][_][_] ║ Carrier (5)    ║\n"
-				+ "║ 4  [_][_][_][_][_][_][_][_][_][_] ║ Battleship (4) ║\n"
-				+ "║ 5  [_][_][_][_][_][_][_][_][_][_] ║ Cruiser (3)    ║\n"
-				+ "║ 6  [_][_][_][_][_][_][_][_][_][_] ║ Submarine (2)  ║\n"
-				+ "║ 7  [_][_][_][_][_][_][_][_][_][_] ║ Destroyer (2)  ║\n"
-				+ "║ 8  [_][_][_][_][_][_][_][_][_][_] ║                ║\n"
-				+ "║ 9  [_][_][_][_][_][_][_][_][_][_] ║                ║\n"
-				+ "║ 10 [_][_][_][_][_][_][_][_][_][_] ║                ║\n"
+				+ "║ 1  "+getBoardPlayerCPURow(0)+" ║ ENEMY BOARD    ║\n"
+				+ "║ 2  "+getBoardPlayerCPURow(1)+" ║                ║\n"
+				+ "║ 3  "+getBoardPlayerCPURow(2)+" ║ Carrier (5)    ║\n"
+				+ "║ 4  "+getBoardPlayerCPURow(3)+" ║ Battleship (4) ║\n"
+				+ "║ 5  "+getBoardPlayerCPURow(4)+" ║ Cruiser (3)    ║\n"
+				+ "║ 6  "+getBoardPlayerCPURow(5)+" ║ Submarine (2)  ║\n"
+				+ "║ 7  "+getBoardPlayerCPURow(6)+" ║ Destroyer (2)  ║\n"
+				+ "║ 8  "+getBoardPlayerCPURow(7)+" ║                ║\n"
+				+ "║ 9  "+getBoardPlayerCPURow(8)+" ║                ║\n"
+				+ "║ 10 "+getBoardPlayerCPURow(9)+" ║                ║\n"
 				+ "╠═══════════════════════════════════╬════════════════╣\n"
 				+ "║     1  2  3  4  5  6  7  8  9  10 ║                ║\n"
 				+ "║ 1  "+getBoardPlayerHUMRow(0)+" ║ PLAYER BOARD   ║\n"
@@ -296,7 +296,12 @@ public class Game {
 		
 		//We try to insert he ship with the validate input
 		insertShipSelectionScreen(validatePosX, validatePosY, validateOrientation, this.boatInsertId);
-		selectedShipInfo(this.boatInsertId);
+		if(this.screen == 1) {
+			selectedShipInfo(this.boatInsertId);
+		} else if(this.screen == 2) {
+			boardInfo();
+		}
+		
 	}
 	
 	private void boardScreenAction(String input) {
@@ -459,5 +464,9 @@ public class Game {
 			default:
 				break;
 		}
+	}
+	
+	private void boardInfo() {
+		
 	}
 }
