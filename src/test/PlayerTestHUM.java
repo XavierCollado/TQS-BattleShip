@@ -4,12 +4,15 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
+import game.Cell;
+import game.CellConstants;
+
 import game.PlayerHUM;
 
 /**
  *
  * @author desirée
- * @version 1.3
+ * @version 1.4
  *
  */
 class PlayerTestHUM {
@@ -48,19 +51,34 @@ class PlayerTestHUM {
     //Then
     assertEquals(false,winner);
   }
-
   @Test
-  void TestUpdateBoardCellNotHitAtFirstPlayer2() {
+  void updateBoardCell_ChangeCorrectlyTheCellPlayer2() {
     //Given
     PlayerHUM playerHUM = new PlayerHUM();
     int posX = 4;
     int posY = 5;
+    Cell newCell = new Cell(4, 5, CellConstants.BATTLESHIP_TYPE);
 
     //When
-    playerHUM.updateBoardCell(posX, posY, playerHUM.getBoard().getCell(posX, posY));
+    playerHUM.updateBoardCell(posX, posY, newCell);
 
     //Then
-    assertEquals(true,playerHUM.getBoard().getCell(posX, posY).ishit());
+    assertEquals(newCell, playerHUM.getBoard().getCell(posX, posY));
+  }
+
+  @Test
+  void updateBoardCell_ChangeCorrectlyTheCellAndDontHitTheNewCellPlayer2() {
+    //Given
+    PlayerHUM playerHUM = new PlayerHUM();
+    int posX = 4;
+    int posY = 5;
+    Cell newCell = new Cell(4, 5, CellConstants.BATTLESHIP_TYPE);
+
+    //When
+    playerHUM.updateBoardCell(posX, posY, newCell);
+
+    //Then
+    assertEquals(false, playerHUM.isCellHit(posX, posY));
   }
   @Test
   void TestUpdateBoardCelliHitAtFirstPlayer2() {
@@ -104,5 +122,4 @@ class PlayerTestHUM {
     //Then
     assertEquals(true,playerHUM.getBoard().getCell(posX,posY).ishit());
   }
-
 }
