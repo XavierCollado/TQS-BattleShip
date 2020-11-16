@@ -15,4 +15,5 @@ public final class CellConstants{
   public static final char WATER_CHAR = '^';
   public static final char FOG_CHAR = '_';
   public static final char BOAT_CHAR = '#';
+  public static final char HIT_CHAR = '*';
 }

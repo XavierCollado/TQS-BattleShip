@@ -7,7 +7,7 @@ import java.awt.event.KeyListener;
 import java.lang.String;
 
 /**
- * @author desirée
+ * @author desirée & xavier
  * @version 1.3
  */
 
@@ -77,7 +77,11 @@ public class PlayerHUM implements Player{
     return aliveDestroyer;
   }
 
-	public String getCellType(int posX, int posY) {
-		return board.getCell(posX, posY).getType();
-	}
+  public String getCellType(int posX, int posY) {
+	return board.getCell(posX, posY).getType();
+  }
+  
+  public boolean isCellHit(int posX, int posY) {
+	  return board.getCell(posX, posY).ishit();
+  }
 }

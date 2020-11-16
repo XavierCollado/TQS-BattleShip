@@ -6,13 +6,13 @@ import game.CellConstants;
 /**
  * 
  * @author xavier
- * @version 3.0
+ * @version 6.0
  *
  */
 public class Game {
 
-	public Player player1;
-	public Player player2;
+	public PlayerHUM player1;
+	public PlayerCPU player2;
 	private int turn;
 	private int screen;
 	private boolean isPlaying;
@@ -164,16 +164,16 @@ public class Game {
 				+ "║ 10 [_][_][_][_][_][_][_][_][_][_] ║                ║\n"
 				+ "╠═══════════════════════════════════╬════════════════╣\n"
 				+ "║     1  2  3  4  5  6  7  8  9  10 ║                ║\n"
-				+ "║ 1  [_][_][_][_][_][_][_][_][_][_] ║ PLAYER BOARD   ║\n"
-				+ "║ 2  [_][_][_][_][_][_][_][_][_][_] ║                ║\n"
-				+ "║ 3  [_][_][_][_][_][_][_][_][_][_] ║ Carrier (5)    ║\n"
-				+ "║ 4  [_][_][_][_][_][_][_][_][_][_] ║ Battleship (4) ║\n"
-				+ "║ 5  [_][_][_][_][_][_][_][_][_][_] ║ Cruiser (3)    ║\n"
-				+ "║ 6  [_][_][_][_][_][_][_][_][_][_] ║ Submarine (2)  ║\n"
-				+ "║ 7  [_][_][_][_][_][_][_][_][_][_] ║ Destroyer (2)  ║\n"
-				+ "║ 8  [_][_][_][_][_][_][_][_][_][_] ║                ║\n"
-				+ "║ 9  [_][_][_][_][_][_][_][_][_][_] ║                ║\n"
-				+ "║ 10 [_][_][_][_][_][_][_][_][_][_] ║                ║\n"
+				+ "║ 1  "+getBoardPlayerHUMRow(0)+" ║ PLAYER BOARD   ║\n"
+				+ "║ 2  "+getBoardPlayerHUMRow(1)+" ║                ║\n"
+				+ "║ 3  "+getBoardPlayerHUMRow(2)+" ║ Carrier (5)    ║\n"
+				+ "║ 4  "+getBoardPlayerHUMRow(3)+" ║ Battleship (4) ║\n"
+				+ "║ 5  "+getBoardPlayerHUMRow(4)+" ║ Cruiser (3)    ║\n"
+				+ "║ 6  "+getBoardPlayerHUMRow(5)+" ║ Submarine (2)  ║\n"
+				+ "║ 7  "+getBoardPlayerHUMRow(6)+" ║ Destroyer (2)  ║\n"
+				+ "║ 8  "+getBoardPlayerHUMRow(7)+" ║                ║\n"
+				+ "║ 9  "+getBoardPlayerHUMRow(8)+" ║                ║\n"
+				+ "║ 10 "+getBoardPlayerHUMRow(9)+" ║                ║\n"
 				+ "╠═══════════════════════════════════╩════════════════╣\n"
 				+ "║ Enter a valid option                               ║\n"
 				+ "║                                                    ║\n"
@@ -192,14 +192,48 @@ public class Game {
 		this.screen = 2;
 	}
 	
-	private String getSelectionRow(int posY) {
+	private String getSelectionRow(int matrixPosY) {
 		char cellChar;
 		String cellRow = "";
 		for(int i = 0; i<10; i++) {
-			if(player1.getCellType(i, posY) == CellConstants.WATER_TYPE) {
+			if(player1.getCellType(i, matrixPosY) == CellConstants.WATER_TYPE) {
 				cellChar = CellConstants.WATER_CHAR;
 			} else {
 				cellChar = CellConstants.BOAT_CHAR;
+			}
+			cellRow = cellRow + "["+cellChar+"]";
+		}
+		return cellRow;
+	}
+	
+	private String getBoardPlayerCPURow(int matrixPosY) {
+		char cellChar;
+		String cellRow = "";
+		for(int i = 0; i<10; i++) {
+			if((player1.getCellType(i, matrixPosY) == CellConstants.WATER_TYPE) && (player1.isCellHit(i, matrixPosY))) {
+				cellChar = CellConstants.WATER_CHAR;
+			} else if((player1.getCellType(i, matrixPosY) != CellConstants.WATER_TYPE) && (player1.isCellHit(i, matrixPosY))){
+				cellChar = CellConstants.BOAT_CHAR;
+			} else {
+				cellChar = CellConstants.FOG_CHAR;
+			}
+			cellRow = cellRow + "["+cellChar+"]";
+		}
+		return cellRow;
+	}
+	
+	private String getBoardPlayerHUMRow(int matrixPosY) {
+		char cellChar;
+		String cellRow = "";
+		for(int i = 0; i<10; i++) {
+			if((player1.getCellType(i, matrixPosY) == CellConstants.WATER_TYPE) && (player1.isCellHit(i, matrixPosY))) {
+				cellChar = CellConstants.WATER_CHAR;
+			} else if((player1.getCellType(i, matrixPosY) != CellConstants.WATER_TYPE) && !(player1.isCellHit(i, matrixPosY))) {
+				cellChar = CellConstants.BOAT_CHAR;
+			} else if((player1.getCellType(i, matrixPosY) != CellConstants.WATER_TYPE) && (player1.isCellHit(i, matrixPosY))){
+				cellChar = CellConstants.HIT_CHAR;
+			} else {
+				cellChar = CellConstants.FOG_CHAR;
 			}
 			cellRow = cellRow + "["+cellChar+"]";
 		}
