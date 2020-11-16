@@ -53,7 +53,10 @@ public class Game {
 	}
 
 	public String readInput() {
-		String input = inpuntScanner.nextLine();
+		String input ="";
+		if(!((this.screen == 2) && (!this.playerHUMTurn))) {
+			input = inpuntScanner.nextLine();
+		}
 		return input;
 	}
 	
@@ -211,13 +214,13 @@ public class Game {
 		char cellChar;
 		String cellRow = "";
 		for(int i = 0; i<10; i++) {
+			cellChar='_';
 			if((player2.getCellType(i, matrixPosY) == CellConstants.WATER_TYPE) && (player2.isCellHit(i, matrixPosY))) {
 				cellChar = CellConstants.WATER_CHAR;
 			} else if((player2.getCellType(i, matrixPosY) != CellConstants.WATER_TYPE) && (player2.isCellHit(i, matrixPosY))){
 				cellChar = CellConstants.BOAT_CHAR;
-			} else {
-				cellChar = CellConstants.FOG_CHAR;
 			}
+			
 			cellRow = cellRow + "["+cellChar+"]";
 		}
 		return cellRow;
@@ -227,15 +230,15 @@ public class Game {
 		char cellChar;
 		String cellRow = "";
 		for(int i = 0; i<10; i++) {
+			cellChar='_';
 			if((player1.getCellType(i, matrixPosY) == CellConstants.WATER_TYPE) && (player1.isCellHit(i, matrixPosY))) {
 				cellChar = CellConstants.WATER_CHAR;
 			} else if((player1.getCellType(i, matrixPosY) != CellConstants.WATER_TYPE) && !(player1.isCellHit(i, matrixPosY))) {
 				cellChar = CellConstants.BOAT_CHAR;
 			} else if((player1.getCellType(i, matrixPosY) != CellConstants.WATER_TYPE) && (player1.isCellHit(i, matrixPosY))){
 				cellChar = CellConstants.HIT_CHAR;
-			} else {
-				cellChar = CellConstants.FOG_CHAR;
 			}
+			
 			cellRow = cellRow + "["+cellChar+"]";
 		}
 		return cellRow;
@@ -303,46 +306,15 @@ public class Game {
 	}
 	
 	private void boardScreenAction(String input) {
-		String[] params;
-		int posX, posY, validatePosX = 0, validatePosY = 0;
-		char firstCharPosX = '_', firstCharPosY = '_';
+		String[] params = input.split(" ", 2);
+		int posX=0, posY=0;
+		boolean validShoot;
+		
+		posX = Integer.parseInt(params[0]);
+		posY = Integer.parseInt(params[1]);
 		
 		
-		if(this.playerHUMTurn) {
-			params = input.split(" ", 2);
-			if(params.length == 2) { // The user insert the input in the correct format "[posX] [posY]"
-				posX = Integer.parseInt(params[0]);
-				posY = Integer.parseInt(params[1]);
-				firstCharPosX = params[0].charAt(0);
-				firstCharPosY = params[1].charAt(0);
-				if ((posX > 10) || (firstCharPosX == '-')) {
-					this.screenMessageDown = "║ INVALID POS_X: Please enter a number from 1 to 10  ║\n";
-				} else {
-					validatePosY = posX;
-				}
-				if ((posY > 10) || (firstCharPosY == '-')) {
-					this.screenMessageDown = "║ INVALID POS_Y: Please enter a number from 1 to 10  ║\n";
-				} else {
-					validatePosY = posY;
-				}
-			} else {
-				
-			}
-			if(player2.isCellHit(validatePosX, validatePosY)) {
-				// Show "This cell is already hit, select another"
-			} else {
-				player1.playTurn(validatePosX, validatePosY);
-			}
-		} else {
-			validatePosX = player2.randomX("");
-			validatePosY = player2.randomY();
-			
-			if(player1.isCellHit(validatePosX, validatePosY)) {
-				// Show "This cell is already hit, select another"
-			} else {
-				player2.playTurn(validatePosX, validatePosY);
-			}
-		}
+		player1.playTurn(posX-1, posY-1);
 	}
 	
 	private void insertShipSelectionScreen(int boardPosX, int boardPosY, char orientation, int boatCountId) {
@@ -433,13 +405,13 @@ public class Game {
 						for(int i=0; i<shipLenght; i++) {
 							player1.updateBoardCell(i+matrixPosX, matrixPosY, new Cell(matrixPosX, matrixPosY, CellConstants.DESTROYER_TYPE));
 							this.boatInsertId = 5;
-							setBoardScreen();
-							while(player2.getBoatsSelectionId() < 5) {
-								player2.initializeCPUBoard();
-							}
-							player2.setEnemyBoard(player1.getBoard());
-							player1.setEnemyBoard(player2.getBoard());
 						}
+						setBoardScreen();
+						while(player2.getBoatsSelectionId() < 5) {
+							player2.initializeCPUBoard();
+						}
+						player2.setEnemyBoard(player1.getBoard());
+						player1.setEnemyBoard(player2.getBoard());
 					}
 				} else if((orientation == 'V') && (boardPosY <= (10 - shipLenght))) {
 					if(isAValidPosition(matrixPosX, matrixPosY, orientation, shipLenght)) {
@@ -489,10 +461,6 @@ public class Game {
 		return valid;
 	}
 	
-	private String removeAllNonNumericCharacters(String text) {
-		return text.replaceAll("[^\\\\d.]", "");
-	}
-	
 	private void selectedShipInfo(int boatCountId) {
 		switch(boatCountId) {
 			case 0:
@@ -515,7 +483,4 @@ public class Game {
 		}
 	}
 	
-	private void boardInfo() {
-		
-	}
 }

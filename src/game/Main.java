@@ -13,8 +13,7 @@ public class Main {
 		// Main game loop
 		game.printScreen(game.getScreen());
 		while(game.isPlaying()) {
-			input = game.readInput();
-			game.applyAction(input);
+			game.applyAction(game.readInput());
 			game.printScreen(game.getScreen());
 		}
 	}
