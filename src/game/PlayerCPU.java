@@ -90,7 +90,7 @@ public class PlayerCPU implements Player{
 		return board.getCell(posX, posY).ishit();
 	}
 	
-	public void initialitzeCPUBoard() {
+	public void initializeCPUBoard() {
 		int boatCountId = this.boatsSelectionId;
 		int boardPosX = randomX();
 		int boardPosY = randomY();

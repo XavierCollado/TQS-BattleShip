@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import game.PlayerCPU;
 import game.Board;
 import game.Cell;
+import game.CellConstants;
 /**
  *
  * @author desirée
@@ -102,6 +103,107 @@ class PlayerTestCPU {
     boolean winner = playerCPU.checkWinCondition(boatsCount);
     //Then
     assertEquals(false,winner);
+  }
+  
+  @Test
+  void initializeBoard_CreatesCarrier() {
+	  //Given
+	  PlayerCPU player = new PlayerCPU();
+	  int expectedCarrierTypeCells = 5, count=0;
+	  
+	  //When
+	  player.initializeCPUBoard();
+	  for(int i=0; i<10; i++) {
+		  for(int j=0; j<10; j++) {
+			  if(player.getCellType(i, j) == CellConstants.CARRIER_TYPE) {
+				  count++;
+			  }
+		  }
+	  }
+	  
+	  //Then
+	  assertEquals(expectedCarrierTypeCells, count);
+	  
+  }
+  
+  @Test
+  void initializeBoard_CreatesBattleship() {
+	  //Given
+	  PlayerCPU player = new PlayerCPU();
+	  int expectedBattleshipTypeCells = 4, count=0;
+	  
+	  //When
+	  player.initializeCPUBoard();
+	  for(int i=0; i<10; i++) {
+		  for(int j=0; j<10; j++) {
+			  if(player.getCellType(i, j) == CellConstants.BATTLESHIP_TYPE) {
+				  count++;
+			  }
+		  }
+	  }
+	  
+	  //Then
+	  assertEquals(expectedBattleshipTypeCells, count);
+  }
+  
+  @Test
+  void initializeBoard_CreatesCruiser() {
+	  //Given
+	  PlayerCPU player = new PlayerCPU();
+	  int expectedCruiserTypeCells = 3, count=0;
+	  
+	  //When
+	  player.initializeCPUBoard();
+	  for(int i=0; i<10; i++) {
+		  for(int j=0; j<10; j++) {
+			  if(player.getCellType(i, j) == CellConstants.CRUISER_TYPE) {
+				  count++;
+			  }
+		  }
+	  }
+	  
+	  //Then
+	  assertEquals(expectedCruiserTypeCells, count);
+  }
+  
+  @Test
+  void initializeBoard_CreatesSubmarine() {
+	  //Given
+	  PlayerCPU player = new PlayerCPU();
+	  int expectedSubmarineTypeCells = 2, count=0;
+	  
+	  //When
+	  player.initializeCPUBoard();
+	  for(int i=0; i<10; i++) {
+		  for(int j=0; j<10; j++) {
+			  if(player.getCellType(i, j) == CellConstants.SUBMARINE_TYPE) {
+				  count++;
+			  }
+		  }
+	  }
+	  
+	  //Then
+	  assertEquals(expectedSubmarineTypeCells, count);
+  }
+  
+  @Test
+  void initializeBoard_CreatesDestroyer() {
+	  //Given
+	  PlayerCPU player = new PlayerCPU();
+	  int expectedDestroyerTypeCells = 2, count=0;
+	  
+	  //When
+	  player.initializeCPUBoard();
+	  for(int i=0; i<10; i++) {
+		  for(int j=0; j<10; j++) {
+			  if(player.getCellType(i, j) == CellConstants.DESTROYER_TYPE) {
+				  count++;
+			  }
+		  }
+	  }
+	  
+	  //Then
+	  assertEquals(expectedDestroyerTypeCells, count);
   }
 
 }
