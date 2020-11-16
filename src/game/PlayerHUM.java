@@ -12,7 +12,7 @@ import java.lang.String;
  */
 
 public class PlayerHUM implements Player{
-  private Board board;
+  private Board board, enemyBoard;
   private int boatsCount;
   private boolean aliveCarrier;
   private boolean aliveBattleship;
@@ -23,6 +23,7 @@ public class PlayerHUM implements Player{
   
   public PlayerHUM(){
     this.board = new Board();
+    this.enemyBoard = new Board();
     this.boatsCount = 0;
     this.aliveCarrier = true;
     this.aliveBattleship = true;
@@ -33,26 +34,17 @@ public class PlayerHUM implements Player{
   public Board getBoard() {
     return board;
   }
-  //It's necessary create Exception class!
-  public void playTurn(int posX,int posY, int screen) {
-    if(screen == 0) {
-
-    }
-    else if(screen == 1) {
-
-    }
-    //Missing read arrows and enter.
-
-    //Condition ENTER_KEY:
-
-    //within the condition:
-    //We put the calls to the functions later.
-
-
+  
+  public void playTurn(int posX,int posY) {
+	  if(board.getCell(posX,posY).ishit()==false) {
+	      board.getCell(posX,posY).hit();
+	  }
   }
+  
   public void updateBoardCell(int posX,int posY,Cell cell) {
     board.updateCell(posX, posY, cell);
   }
+  
   public boolean checkWinCondition(int boatsCount) {
     boolean win = false;
     if(boatsCount == 5){
@@ -83,5 +75,9 @@ public class PlayerHUM implements Player{
   
   public boolean isCellHit(int posX, int posY) {
 	  return board.getCell(posX, posY).ishit();
+  }
+  
+  public void setEnemyBoard(Board newEnemyBoard) {
+	  this.enemyBoard = newEnemyBoard;
   }
 }

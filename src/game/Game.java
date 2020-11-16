@@ -13,7 +13,7 @@ public class Game {
 
 	public PlayerHUM player1;
 	public PlayerCPU player2;
-	private int turn;
+	private boolean playerHUMTurn;
 	private int screen;
 	private boolean isPlaying;
 	private String screenMessageTop;
@@ -24,7 +24,7 @@ public class Game {
 	public Game() {
 		this.player1 = new PlayerHUM();
 		this.player2 = new PlayerCPU();
-		this.turn = 0;
+		this.playerHUMTurn = true;
 		this.screen = 0;
 		this.isPlaying = true;
 		this.screenMessageTop = "║ Select a valid option                              ║\n";
@@ -59,19 +59,20 @@ public class Game {
 	
 	public void applyAction(String input) {
 		String response = input;
-		// Actions for MenuScreen
-		if(this.screen == 0) {
-			menuScreenAction(response);
-		}
+		
+		//Actions for BoardScreen
+		if(this.screen == 2) {
+			boardScreenAction(response);
+		}		
 		
 		//Actions for SelectionScreen
 		if(this.screen == 1) {
 			selectionScreenAction(response);
 		}
 		
-		//Actions for BoardScreen
-		if(this.screen == 2) {
-			boardScreenAction(response);
+		// Actions for MenuScreen
+		if(this.screen == 0) {
+			menuScreenAction(response);
 		}
 	}
 	
@@ -210,9 +211,9 @@ public class Game {
 		char cellChar;
 		String cellRow = "";
 		for(int i = 0; i<10; i++) {
-			if((player1.getCellType(i, matrixPosY) == CellConstants.WATER_TYPE) && (player1.isCellHit(i, matrixPosY))) {
+			if((player2.getCellType(i, matrixPosY) == CellConstants.WATER_TYPE) && (player2.isCellHit(i, matrixPosY))) {
 				cellChar = CellConstants.WATER_CHAR;
-			} else if((player1.getCellType(i, matrixPosY) != CellConstants.WATER_TYPE) && (player1.isCellHit(i, matrixPosY))){
+			} else if((player2.getCellType(i, matrixPosY) != CellConstants.WATER_TYPE) && (player2.isCellHit(i, matrixPosY))){
 				cellChar = CellConstants.BOAT_CHAR;
 			} else {
 				cellChar = CellConstants.FOG_CHAR;
@@ -298,14 +299,50 @@ public class Game {
 		insertShipSelectionScreen(validatePosX, validatePosY, validateOrientation, this.boatInsertId);
 		if(this.screen == 1) {
 			selectedShipInfo(this.boatInsertId);
-		} else if(this.screen == 2) {
-			boardInfo();
-		}
-		
+		} 
 	}
 	
 	private void boardScreenAction(String input) {
-		 
+		String[] params;
+		int posX, posY, validatePosX = 0, validatePosY = 0;
+		char firstCharPosX = '_', firstCharPosY = '_';
+		
+		
+		if(this.playerHUMTurn) {
+			params = input.split(" ", 2);
+			if(params.length == 2) { // The user insert the input in the correct format "[posX] [posY]"
+				posX = Integer.parseInt(params[0]);
+				posY = Integer.parseInt(params[1]);
+				firstCharPosX = params[0].charAt(0);
+				firstCharPosY = params[1].charAt(0);
+				if ((posX > 10) || (firstCharPosX == '-')) {
+					this.screenMessageDown = "║ INVALID POS_X: Please enter a number from 1 to 10  ║\n";
+				} else {
+					validatePosY = posX;
+				}
+				if ((posY > 10) || (firstCharPosY == '-')) {
+					this.screenMessageDown = "║ INVALID POS_Y: Please enter a number from 1 to 10  ║\n";
+				} else {
+					validatePosY = posY;
+				}
+			} else {
+				
+			}
+			if(player2.isCellHit(validatePosX, validatePosY)) {
+				// Show "This cell is already hit, select another"
+			} else {
+				player1.playTurn(validatePosX, validatePosY);
+			}
+		} else {
+			validatePosX = player2.randomX();
+			validatePosY = player2.randomY();
+			
+			if(player1.isCellHit(validatePosX, validatePosY)) {
+				// Show "This cell is already hit, select another"
+			} else {
+				player2.playTurn(validatePosX, validatePosY);
+			}
+		}
 	}
 	
 	private void insertShipSelectionScreen(int boardPosX, int boardPosY, char orientation, int boatCountId) {
@@ -396,7 +433,6 @@ public class Game {
 						for(int i=0; i<shipLenght; i++) {
 							player1.updateBoardCell(i+matrixPosX, matrixPosY, new Cell(matrixPosX, matrixPosY, CellConstants.DESTROYER_TYPE));
 							this.boatInsertId = 5;
-							setBoardScreen();
 						}
 					}
 				} else if((orientation == 'V') && (boardPosY <= (10 - shipLenght))) {
@@ -404,10 +440,16 @@ public class Game {
 						for(int i=0; i<shipLenght; i++) {
 							player1.updateBoardCell(matrixPosX, i+matrixPosY, new Cell(matrixPosX, matrixPosY, CellConstants.DESTROYER_TYPE));
 							this.boatInsertId = 5;
-							setBoardScreen();
 						}
 					}
 				}
+				break;
+			// All ships setup
+			case 5:
+				setBoardScreen();
+				player2.initialitzeCPUBoard();
+				player2.setEnemyBoard(player1.getBoard());
+				player1.setEnemyBoard(player2.getBoard());
 				break;
 			default:
 				break;

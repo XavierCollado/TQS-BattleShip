@@ -24,7 +24,7 @@ class PlayerTestCPU {
     int gameScreenId = 3;
     PlayerCPU playerCPU = new PlayerCPU();
     //When
-    playerCPU.playTurn(posX, posY,gameScreenId);
+    playerCPU.playTurn(posX, posY);
     //Then
     assertEquals(true,playerCPU.getBoard().getCell(posX,posY).ishit());
   }
@@ -38,7 +38,7 @@ class PlayerTestCPU {
     int gameScreenId = 3;
     //When
     playerCPU.getBoard().getCell(posX, posY).hit();
-    playerCPU.playTurn(posX, posY,gameScreenId);
+    playerCPU.playTurn(posX, posY);
 
     //Then
     assertEquals(true,playerCPU.getBoard().getCell(posX,posY).ishit());
