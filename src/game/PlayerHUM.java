@@ -35,6 +35,10 @@ public class PlayerHUM implements Player{
     return board;
   }
   
+  public Board getEnemyBoard() {
+	  return this.enemyBoard;
+  }
+  
   public void playTurn(int posX,int posY) {
 	  enemyBoard.getCell(posX,posY).hit();
   }

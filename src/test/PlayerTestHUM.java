@@ -94,6 +94,7 @@ class PlayerTestHUM {
     //Then
     assertEquals(true,playerHUM.getBoard().getCell(posX, posY).ishit());
   }
+  
   @Test
   void TestPlayTurnNotHitPlayer2() {
     //Given
@@ -105,7 +106,7 @@ class PlayerTestHUM {
     //When
     playerHUM.playTurn(posX, posY);
     //Then
-    assertEquals(true,playerHUM.getBoard().getCell(posX,posY).ishit());
+    assertEquals(true,playerHUM.getEnemyBoard().getCell(posX,posY).ishit());
   }
 
   @Test
@@ -120,6 +121,6 @@ class PlayerTestHUM {
     playerHUM.playTurn(posX, posY);
 
     //Then
-    assertEquals(true,playerHUM.getBoard().getCell(posX,posY).ishit());
+    assertEquals(true,playerHUM.getEnemyBoard().getCell(posX,posY).ishit());
   }
 }
