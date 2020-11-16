@@ -35,7 +35,7 @@ public class PlayerCPU implements Player{
   }
   public int randomX(String shipType) {
     Random random = new Random();
-    int result = 0;
+    int result = random.nextInt(10);
     
     if(shipType == CellConstants.CARRIER_TYPE) {
     	result = random.nextInt(4 - 0 + 1);
@@ -47,15 +47,13 @@ public class PlayerCPU implements Player{
     	result = random.nextInt(8 - 0 + 1);
     } else if(shipType == CellConstants.DESTROYER_TYPE) {
     	result = random.nextInt(8 - 0 + 1);
-    } else {
-    	result = random.nextInt(9 - 0 + 1);
-    }
+    } 
     
     return result;
   }
   public int randomY() {
     Random random = new Random();
-    int result = random.nextInt(9 - 0 + 1);
+    int result = random.nextInt(10);
     return result;
   }
   

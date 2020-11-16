@@ -92,7 +92,7 @@ public class Game {
 	}
 	
 	private void printMenuScreen() {
-		System.out.print("╔════════════════════════════════════════════════════╗\n"
+		System.out.println("╔════════════════════════════════════════════════════╗\n"
 				+ "║                                                    ║\n"
 				+ "║                                                    ║\n"
 				+ "║                   BATTLESHIPS                      ║\n"
@@ -122,7 +122,7 @@ public class Game {
 	}
 	
 	private void printSelectionScreen() {
-		System.out.print("╔════════════════════════════════════════════════════╗\n"
+		System.out.println("╔════════════════════════════════════════════════════╗\n"
 				+ "║ <RULES>                                            ║\n"
 				+ "║                                                    ║\n"
 				+ "║ · Now you need to setUp your boats starting with   ║\n"
@@ -154,7 +154,7 @@ public class Game {
 	}
 	
 	private void printBoardScreen() {
-		System.out.print("╔═══════════════════════════════════╦════════════════╗\n"
+		System.out.println("╔═══════════════════════════════════╦════════════════╗\n"
 				+ "║     1  2  3  4  5  6  7  8  9  10 ║                ║\n"
 				+ "║ 1  "+getBoardPlayerCPURow(0)+" ║ ENEMY BOARD    ║\n"
 				+ "║ 2  "+getBoardPlayerCPURow(1)+" ║                ║\n"
@@ -308,13 +308,26 @@ public class Game {
 	private void boardScreenAction(String input) {
 		String[] params = input.split(" ", 2);
 		int posX=0, posY=0;
-		boolean validShoot;
+		boolean validShoot=false;
 		
-		posX = Integer.parseInt(params[0]);
-		posY = Integer.parseInt(params[1]);
-		
-		
-		player1.playTurn(posX-1, posY-1);
+		if(this.playerHUMTurn) {
+			posX = Integer.parseInt(params[0])-1;
+			posY = Integer.parseInt(params[1])-1;
+			if(!player2.getEnemyBoard().getCell(posX, posY).ishit()) {
+				player1.playTurn(posX, posY);
+				this.playerHUMTurn = false;
+			}
+		} else {
+			while(!validShoot) {
+				posX = player2.randomX("");
+				posY = player2.randomY();
+				if(!player2.getEnemyBoard().getCell(posX, posY).ishit()){
+					validShoot = true;
+				}
+			}
+			player2.playTurn(posX, posY);
+			this.playerHUMTurn = true;
+		}
 	}
 	
 	private void insertShipSelectionScreen(int boardPosX, int boardPosY, char orientation, int boatCountId) {
