@@ -20,8 +20,7 @@ class PlayerTestCPU {
 
     int posX = 3;
     int posY = 5;
-    String type = "";
-    int gameScreenId = 3;
+
     PlayerCPU playerCPU = new PlayerCPU();
     //When
     playerCPU.playTurn(posX, posY);
@@ -35,7 +34,7 @@ class PlayerTestCPU {
     PlayerCPU playerCPU = new PlayerCPU();
     int posX = 3;
     int posY = 4;
-    int gameScreenId = 3;
+
     //When
     playerCPU.getBoard().getCell(posX, posY).hit();
     playerCPU.playTurn(posX, posY);

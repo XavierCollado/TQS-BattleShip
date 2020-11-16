@@ -9,7 +9,7 @@ import game.PlayerHUM;
 /**
  *
  * @author desirée
- * @version 1.2
+ * @version 1.3
  *
  */
 class PlayerTestHUM {
@@ -75,6 +75,34 @@ class PlayerTestHUM {
     playerHUM.updateBoardCell(posX, posY, playerHUM.getBoard().getCell(posX, posY));
     //Then
     assertEquals(true,playerHUM.getBoard().getCell(posX, posY).ishit());
+  }
+  @Test
+  void TestPlayTurnNotHitPlayer2() {
+    //Given
+
+    int posX = 3;
+    int posY = 5;
+
+    PlayerHUM playerHUM = new PlayerHUM();
+    //When
+    playerHUM.playTurn(posX, posY);
+    //Then
+    assertEquals(true,playerHUM.getBoard().getCell(posX,posY).ishit());
+  }
+
+  @Test
+  void TestPlayTurnHitPlayer2() {
+    //Given
+    PlayerHUM playerHUM = new PlayerHUM();
+    int posX = 3;
+    int posY = 4;
+
+    //When
+    playerHUM.getBoard().getCell(posX, posY).hit();
+    playerHUM.playTurn(posX, posY);
+
+    //Then
+    assertEquals(true,playerHUM.getBoard().getCell(posX,posY).ishit());
   }
 
 }
