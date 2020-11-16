@@ -9,8 +9,8 @@ import game.Cell;
 import game.CellConstants;
 /**
  *
- * @author desirée
- * @version 1.4
+ * @author desirée & xavier
+ * @version 1.6
  *
  */
 class PlayerTestCPU {
@@ -44,7 +44,7 @@ class PlayerTestCPU {
   }
   
   @Test
-  void TestUpdateBoardCellChangeCorrectlyTheCell() {
+  void updateBoardCell_ChangeCorrectlyTheCell() {
     //Given
     PlayerCPU playerCPU = new PlayerCPU();
     int posX = 4;
@@ -59,7 +59,7 @@ class PlayerTestCPU {
   }
   
   @Test
-  void TestUpdateBoardCellChangeCorrectlyTheCellAndDontHitTheNewCell() {
+  void updateBoardCell_ChangeCorrectlyTheCellAndDontHitTheNewCell() {
     //Given
     PlayerCPU playerCPU = new PlayerCPU();
     int posX = 4;

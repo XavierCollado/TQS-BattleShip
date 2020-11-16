@@ -334,7 +334,7 @@ public class Game {
 				player1.playTurn(validatePosX, validatePosY);
 			}
 		} else {
-			validatePosX = player2.randomX();
+			validatePosX = player2.randomX("");
 			validatePosY = player2.randomY();
 			
 			if(player1.isCellHit(validatePosX, validatePosY)) {
@@ -434,7 +434,9 @@ public class Game {
 							player1.updateBoardCell(i+matrixPosX, matrixPosY, new Cell(matrixPosX, matrixPosY, CellConstants.DESTROYER_TYPE));
 							this.boatInsertId = 5;
 							setBoardScreen();
-							player2.initializeCPUBoard();
+							while(player2.getBoatsSelectionId() < 5) {
+								player2.initializeCPUBoard();
+							}
 							player2.setEnemyBoard(player1.getBoard());
 							player1.setEnemyBoard(player2.getBoard());
 						}
