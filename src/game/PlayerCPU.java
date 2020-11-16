@@ -96,7 +96,7 @@ public class PlayerCPU implements Player{
 		int boardPosY = randomY();
 		char orientation = 'H'; //Pending to randomize the H / V selection
 		int shipLenght;
-		int matrixPosX = boardPosX-1, matrixPosY = boardPosY-1;
+		int matrixPosX = boardPosX, matrixPosY = boardPosY;
 		switch(boatCountId) {
 			// Carrier
 			case 0:

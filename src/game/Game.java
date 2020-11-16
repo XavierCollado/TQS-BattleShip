@@ -433,6 +433,10 @@ public class Game {
 						for(int i=0; i<shipLenght; i++) {
 							player1.updateBoardCell(i+matrixPosX, matrixPosY, new Cell(matrixPosX, matrixPosY, CellConstants.DESTROYER_TYPE));
 							this.boatInsertId = 5;
+							setBoardScreen();
+							player2.initialitzeCPUBoard();
+							player2.setEnemyBoard(player1.getBoard());
+							player1.setEnemyBoard(player2.getBoard());
 						}
 					}
 				} else if((orientation == 'V') && (boardPosY <= (10 - shipLenght))) {
@@ -440,16 +444,17 @@ public class Game {
 						for(int i=0; i<shipLenght; i++) {
 							player1.updateBoardCell(matrixPosX, i+matrixPosY, new Cell(matrixPosX, matrixPosY, CellConstants.DESTROYER_TYPE));
 							this.boatInsertId = 5;
+							setBoardScreen();
+							player2.initialitzeCPUBoard();
+							player2.setEnemyBoard(player1.getBoard());
+							player1.setEnemyBoard(player2.getBoard());
 						}
 					}
 				}
 				break;
 			// All ships setup
 			case 5:
-				setBoardScreen();
-				player2.initialitzeCPUBoard();
-				player2.setEnemyBoard(player1.getBoard());
-				player1.setEnemyBoard(player2.getBoard());
+				
 				break;
 			default:
 				break;
