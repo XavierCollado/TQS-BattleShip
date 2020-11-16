@@ -9,7 +9,7 @@ import game.Cell;
 /**
  *
  * @author desirée
- * @version 1.3
+ * @version 1.4
  *
  */
 class PlayerTestCPU {
@@ -87,6 +87,17 @@ class PlayerTestCPU {
     //Given
     PlayerCPU playerCPU = new PlayerCPU();
     int boatsCount = 2;
+
+    //When
+    boolean winner = playerCPU.checkWinCondition(boatsCount);
+    //Then
+    assertEquals(false,winner);
+  }
+  @Test
+  void TestCheckWinNegativeBiggerValue(){
+    //Given
+    PlayerCPU playerCPU = new PlayerCPU();
+    int boatsCount = 7;
 
     //When
     boolean winner = playerCPU.checkWinCondition(boatsCount);

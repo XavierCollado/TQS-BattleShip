@@ -9,7 +9,7 @@ import game.PlayerHUM;
 /**
  *
  * @author desirée
- * @version 1.1
+ * @version 1.2
  *
  */
 class PlayerTestHUM {
@@ -28,14 +28,27 @@ class PlayerTestHUM {
   @Test
   void TestCheckWinNegativePlayer2(){
     //Given
-    PlayerHUM playerCPU = new PlayerHUM();
+    PlayerHUM playerHUM = new PlayerHUM();
     int boatsCount = 2;
 
     //When
-    boolean winner = playerCPU.checkWinCondition(boatsCount);
+    boolean winner = playerHUM.checkWinCondition(boatsCount);
     //Then
     assertEquals(false,winner);
   }
+
+  @Test
+  void TestCheckWinNegativePlayer2BiggerValue(){
+    //Given
+    PlayerHUM playerHUM = new PlayerHUM();
+    int boatsCount = 2;
+
+    //When
+    boolean winner = playerHUM.checkWinCondition(boatsCount);
+    //Then
+    assertEquals(false,winner);
+  }
+
   @Test
   void TestUpdateBoardCellNotHitAtFirstPlayer2() {
     //Given
