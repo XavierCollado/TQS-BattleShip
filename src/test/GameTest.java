@@ -10,7 +10,7 @@ import game.CellConstants;
 
 /**
  * 
- * @author xavier
+ * @author xavier 
  * @version 4.0
  */
 class GameTest {
@@ -477,44 +477,44 @@ class GameTest {
 	}
 	
 	// This test checks what happens when I enter an input with a valid format and vertical orientation but the ship is next to another ship - (Submarine)
-		@Test
-		void applyAction_SelctionScreen_WhenWeEnterValidInputWithVerticalOrientation_SubmarineIsNextToOtherShip() {
-			// Given
-			Game game = new Game();
-			String selectStartGame = "1";
-			int boatInsertId_InsertingSubmarine = 3;
-			game.applyAction(selectStartGame); //We go to the SelectionScreen
-			game.applyAction("1 1 V");		
-			game.applyAction("3 4 V");		
-			game.applyAction("5 3 V");	
+	@Test
+	void applyAction_SelctionScreen_WhenWeEnterValidInputWithVerticalOrientation_SubmarineIsNextToOtherShip() {
+		// Given
+		Game game = new Game();
+		String selectStartGame = "1";
+		int boatInsertId_InsertingSubmarine = 3;
+		game.applyAction(selectStartGame); //We go to the SelectionScreen
+		game.applyAction("1 1 V");		
+		game.applyAction("3 4 V");		
+		game.applyAction("5 3 V");	
 			
-			// When
-			game.applyAction("4 4 V");
+		// When
+		game.applyAction("4 4 V");
 					
-			// Then
-			assertEquals(boatInsertId_InsertingSubmarine, game.getBoatInsertId());
-		}
+		// Then
+		assertEquals(boatInsertId_InsertingSubmarine, game.getBoatInsertId());
+	}
 
-		// This test checks what happens when I enter an input with a valid format and horizontal Orientation - (Submarine)
-		@Test
-		void applyAction_SelctionScreen_WhenWeEnterValidInputWithHorizontalOrientation_Submarine() {
-			// Given
-			Game game = new Game();
-			String selectStartGame = "1";
-			int boatInsertId_InsertingDestroyer = 4;
-			game.applyAction(selectStartGame); //We go to the SelectionScreen
-			game.applyAction("1 1 H");
-			game.applyAction("2 3 H");
-			game.applyAction("2 5 H");
+	// This test checks what happens when I enter an input with a valid format and horizontal Orientation - (Submarine)
+	@Test
+	void applyAction_SelctionScreen_WhenWeEnterValidInputWithHorizontalOrientation_Submarine() {
+		// Given
+		Game game = new Game();
+		String selectStartGame = "1";
+		int boatInsertId_InsertingDestroyer = 4;
+		game.applyAction(selectStartGame); //We go to the SelectionScreen
+		game.applyAction("1 1 H");
+		game.applyAction("2 3 H");
+		game.applyAction("2 5 H");
 			
-			// When
-			game.applyAction("3 7 H");
+		// When
+		game.applyAction("3 7 H");
 						
-			// Then
-			assertEquals(boatInsertId_InsertingDestroyer, game.getBoatInsertId()); 
-			assertEquals(CellConstants.SUBMARINE_TYPE, game.player1.getCellType(2, 6));
-			assertEquals(CellConstants.SUBMARINE_TYPE, game.player1.getCellType(3, 6));
-		}
+		// Then
+		assertEquals(boatInsertId_InsertingDestroyer, game.getBoatInsertId()); 
+		assertEquals(CellConstants.SUBMARINE_TYPE, game.player1.getCellType(2, 6));
+		assertEquals(CellConstants.SUBMARINE_TYPE, game.player1.getCellType(3, 6));
+	}
 		
 	// This test checks what happens when I enter an input with a valid format and vertical Orientation - (Submarine)
 	@Test
@@ -598,48 +598,48 @@ class GameTest {
 	}
 	
 	// This test checks what happens when I enter an input with a valid format and vertical orientation but the ship is next to another ship - (Destroyer)
-		@Test
-		void applyAction_SelctionScreen_WhenWeEnterValidInputWithVerticalOrientation_DestroyerIsNextToOtherShip() {
-			// Given
-			Game game = new Game();
-			String selectStartGame = "1";
-			int boatInsertId_InsertingDestroyer = 4;
-			game.applyAction(selectStartGame); //We go to the SelectionScreen
-			game.applyAction("1 1 V");		
-			game.applyAction("3 4 V");		
-			game.applyAction("5 3 V");		
-			game.applyAction("7 4 V");	
+	@Test
+	void applyAction_SelctionScreen_WhenWeEnterValidInputWithVerticalOrientation_DestroyerIsNextToOtherShip() {
+		// Given
+		Game game = new Game();
+		String selectStartGame = "1";
+		int boatInsertId_InsertingDestroyer = 4;
+		game.applyAction(selectStartGame); //We go to the SelectionScreen
+		game.applyAction("1 1 V");		
+		game.applyAction("3 4 V");		
+		game.applyAction("5 3 V");		
+		game.applyAction("7 4 V");	
 			
-			// When
-			game.applyAction("6 4 V");
+		// When
+		game.applyAction("6 4 V");
 					
-			// Then
-			assertEquals(boatInsertId_InsertingDestroyer, game.getBoatInsertId());
-		}
-
-		// This test checks what happens when I enter an input with a valid format and horizontal Orientation - (Destroyer)
-		@Test
-		void applyAction_SelctionScreen_WhenWeEnterValidInputWithHorizontalOrientation_Destroyer() {
-			// Given
-			Game game = new Game();
-			String selectStartGame = "1";
-			int boardScreenId = 2;
-			int boatInsertId_AllInserted = 5;
-			game.applyAction(selectStartGame); //We go to the SelectionScreen
-			game.applyAction("1 1 H");
-			game.applyAction("2 3 H");
-			game.applyAction("2 5 H");
-			game.applyAction("3 7 H");
+		// Then
+		assertEquals(boatInsertId_InsertingDestroyer, game.getBoatInsertId());
+	}
+	
+	// This test checks what happens when I enter an input with a valid format and horizontal Orientation - (Destroyer)
+	@Test
+	void applyAction_SelctionScreen_WhenWeEnterValidInputWithHorizontalOrientation_Destroyer() {
+		// Given
+		Game game = new Game();
+		String selectStartGame = "1";
+		int boardScreenId = 3;
+		int boatInsertId_AllInserted = 5;
+		game.applyAction(selectStartGame); //We go to the SelectionScreen
+		game.applyAction("1 1 H");
+		game.applyAction("2 3 H");
+		game.applyAction("2 5 H");
+		game.applyAction("3 7 H");
 			
-			// When
-			game.applyAction("9 9 H");
+		// When
+		game.applyAction("9 9 H");
 						
-			// Then
-			assertEquals(boatInsertId_AllInserted, game.getBoatInsertId()); 
-			assertEquals(CellConstants.DESTROYER_TYPE, game.player1.getCellType(8, 8));
-			assertEquals(CellConstants.DESTROYER_TYPE, game.player1.getCellType(9, 8));
-			assertEquals(boardScreenId, game.getScreen()); //As we insert all the ships we go to the BoardScreen
-		}
+		// Then
+		assertEquals(boatInsertId_AllInserted, game.getBoatInsertId()); 
+		assertEquals(CellConstants.DESTROYER_TYPE, game.player1.getCellType(8, 8));
+		assertEquals(CellConstants.DESTROYER_TYPE, game.player1.getCellType(9, 8));
+		assertEquals(boardScreenId, game.getScreen()); //As we insert all the ships we go to the BoardScreen
+	}
 		
 	// This test checks what happens when I enter an input with a valid format and vertical Orientation - (Destroyer)
 	@Test
@@ -647,7 +647,7 @@ class GameTest {
 		// Given
 		Game game = new Game();
 		String selectStartGame = "1";
-		int boardScreenId = 2;
+		int boardScreenId = 3;
 		int boatInsertId_AllInserted = 5;
 		game.applyAction(selectStartGame); //We go to the SelectionScreen
 		game.applyAction("1 1 V");

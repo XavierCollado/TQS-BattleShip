@@ -21,15 +21,15 @@ public class Board{
     return cells[posX][posY];
   }
   public void updateCell(int posX,int posY, Cell c) {
-    if(posX >= 0 && posY >= 0 && posX < 10 && posY < 10) {
-      for(int i = 0; i < cells.length; i++) {
-        for(int j= 0; j < cells[i].length; j++) {
-          if(i == posX && j == posY) {
-            cells[posX][posY] = c;
-          }
+    //if(posX >= 0 && posY >= 0 && posX < 10 && posY < 10) {
+      //for(int i = 0; i < cells.length; i++) {
+        ////if(i == posX && j == posY) {
+            //cells[posX][posY] = c;
+          //}
 
-        }
-      }
-    }
+        //}
+      //}
+    //}
+	cells[posX][posY] = c;
   }
 }

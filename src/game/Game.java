@@ -150,7 +150,34 @@ public class Game {
 	}
 	
 	private void printBoardScreen() {
-		
+		System.out.print("╔═══════════════════════════════════╦════════════════╗\n"
+				+ "║     1  2  3  4  5  6  7  8  9  10 ║                ║\n"
+				+ "║ 1  [_][_][_][_][_][_][_][_][_][_] ║ ENEMY BOARD    ║\n"
+				+ "║ 2  [_][_][_][_][_][_][_][_][_][_] ║                ║\n"
+				+ "║ 3  [_][_][_][_][_][_][_][_][_][_] ║ Carrier (5)    ║\n"
+				+ "║ 4  [_][_][_][_][_][_][_][_][_][_] ║ Battleship (4) ║\n"
+				+ "║ 5  [_][_][_][_][_][_][_][_][_][_] ║ Cruiser (3)    ║\n"
+				+ "║ 6  [_][_][_][_][_][_][_][_][_][_] ║ Submarine (2)  ║\n"
+				+ "║ 7  [_][_][_][_][_][_][_][_][_][_] ║ Destroyer (2)  ║\n"
+				+ "║ 8  [_][_][_][_][_][_][_][_][_][_] ║                ║\n"
+				+ "║ 9  [_][_][_][_][_][_][_][_][_][_] ║                ║\n"
+				+ "║ 10 [_][_][_][_][_][_][_][_][_][_] ║                ║\n"
+				+ "╠═══════════════════════════════════╬════════════════╣\n"
+				+ "║     1  2  3  4  5  6  7  8  9  10 ║                ║\n"
+				+ "║ 1  [_][_][_][_][_][_][_][_][_][_] ║ PLAYER BOARD   ║\n"
+				+ "║ 2  [_][_][_][_][_][_][_][_][_][_] ║                ║\n"
+				+ "║ 3  [_][_][_][_][_][_][_][_][_][_] ║ Carrier (5)    ║\n"
+				+ "║ 4  [_][_][_][_][_][_][_][_][_][_] ║ Battleship (4) ║\n"
+				+ "║ 5  [_][_][_][_][_][_][_][_][_][_] ║ Cruiser (3)    ║\n"
+				+ "║ 6  [_][_][_][_][_][_][_][_][_][_] ║ Submarine (2)  ║\n"
+				+ "║ 7  [_][_][_][_][_][_][_][_][_][_] ║ Destroyer (2)  ║\n"
+				+ "║ 8  [_][_][_][_][_][_][_][_][_][_] ║                ║\n"
+				+ "║ 9  [_][_][_][_][_][_][_][_][_][_] ║                ║\n"
+				+ "║ 10 [_][_][_][_][_][_][_][_][_][_] ║                ║\n"
+				+ "╠═══════════════════════════════════╩════════════════╣\n"
+				+ "║ Enter a valid option                               ║\n"
+				+ "║                                                    ║\n"
+				+ "╚════════════════════════════════════════════════════╝");
 	}
 	
 	private void setMenuScreen() {
@@ -196,30 +223,207 @@ public class Game {
 	}
 	
 	private void selectionScreenAction(String input) {
+		selectedShipInfo(this.boatInsertId);
 		String[] params = input.split(" ", 3);
-		//int posX = params[0];
-		//int posY = params[1];
-		String orientation = params[2];
+		int tempPosX, tempPosY, validatePosX = 0, validatePosY = 0;
+		char validateOrientation = '-', firstCharPos;
 		
 		//Validate posX
-		if(params[0]=="") {
-			
+		firstCharPos = params[0].charAt(0);
+		
+		//params[0] = removeAllNonNumericCharacters(params[0]);
+		tempPosX = Integer.parseInt(params[0]);
+		if((tempPosX > 10) || (firstCharPos=='-')) {
+			this.screenMessageDown = "║ INVALID POS_X: Please enter a number from 1 to 10  ║\n";
+		} else {
+			validatePosX = tempPosX;
 		}
 		//Validate posY
 		if(params.length>1) {
-			if(params[1]=="") {
-				
+			firstCharPos = params[0].charAt(0);
+			//params[1] = removeAllNonNumericCharacters(params[1]);
+			tempPosY = Integer.parseInt(params[1]);
+			if((tempPosY > 10) || (firstCharPos == '-')) {
+				this.screenMessageDown = "║ INVALID POS_Y: Please enter a number from 1 to 10  ║\n";
+			} else {
+				validatePosY = tempPosY;
 			}
 		}
 		//Validate orientation
 		if(params.length>2) {
-			if(params[2]=="") {
-				
-			}
+			if(params[2].charAt(0)=='H') {
+				validateOrientation = params[2].charAt(0);
+			} else if(params[2].charAt(0)=='V') {
+				validateOrientation = params[2].charAt(0);	
+			} else {
+				this.screenMessageDown = "║ INVALID ORIENTATION: Please enter H or V           ║\n";
+			}			
 		}
+		
+		//We try to insert he ship with the validate input
+		insertShipSelectionScreen(validatePosX, validatePosY, validateOrientation, this.boatInsertId);
+		selectedShipInfo(this.boatInsertId);
 	}
 	
 	private void boardScreenAction(String input) {
-		
+		 
+	}
+	
+	private void insertShipSelectionScreen(int boardPosX, int boardPosY, char orientation, int boatCountId) {
+		int shipLenght;
+		int matrixPosX = boardPosX-1, matrixPosY = boardPosY-1;
+		switch(boatCountId) {
+			// Carrier
+			case 0:
+				shipLenght = 5;
+				if((orientation == 'H') && (boardPosX <= (10 - shipLenght))) {
+					if(isAValidPosition(matrixPosX, matrixPosY, orientation, shipLenght)) {
+						for(int i=0; i<shipLenght; i++) {
+							player1.updateBoardCell(i+matrixPosX, matrixPosY, new Cell(matrixPosX, matrixPosY, CellConstants.CARRIER_TYPE));
+							this.boatInsertId = 1;
+						}
+					}
+				} else if((orientation == 'V') && (boardPosY <= (10 - shipLenght))) {
+					if(isAValidPosition(matrixPosX, matrixPosY, orientation, shipLenght)) {
+						for(int i=0; i<shipLenght; i++) {
+							player1.updateBoardCell(matrixPosX, i+matrixPosY, new Cell(matrixPosX, matrixPosY, CellConstants.CARRIER_TYPE));
+							this.boatInsertId = 1;
+						}
+					}
+				}
+				break;
+			//Battleship
+			case 1:
+				shipLenght = 4;
+				if((orientation == 'H') && (boardPosX <= (10 - shipLenght))) {
+					if(isAValidPosition(matrixPosX, matrixPosY, orientation, shipLenght)) {
+						for(int i=0; i<shipLenght; i++) {
+							player1.updateBoardCell(i+matrixPosX, matrixPosY, new Cell(matrixPosX, matrixPosY, CellConstants.BATTLESHIP_TYPE));
+							this.boatInsertId = 2;
+						}
+					}
+				} else if((orientation == 'V') && (boardPosY <= (10 - shipLenght))) {
+					if(isAValidPosition(matrixPosX, matrixPosY, orientation, shipLenght)) {
+						for(int i=0; i<shipLenght; i++) {
+							player1.updateBoardCell(matrixPosX, i+matrixPosY, new Cell(matrixPosX, matrixPosY, CellConstants.BATTLESHIP_TYPE));
+							this.boatInsertId = 2;
+						}
+					}
+				}
+				break;
+			//Cruiser
+			case 2:
+				shipLenght = 3;
+				if((orientation == 'H') && (boardPosX <= (10 - shipLenght))) {
+					if(isAValidPosition(matrixPosX, matrixPosY, orientation, shipLenght)) {
+						for(int i=0; i<shipLenght; i++) {
+							player1.updateBoardCell(i+matrixPosX, matrixPosY, new Cell(matrixPosX, matrixPosY, CellConstants.CRUISER_TYPE));
+							this.boatInsertId = 3;
+						}
+					}
+				} else if((orientation == 'V') && (boardPosY <= (10 - shipLenght))) {
+					if(isAValidPosition(matrixPosX, matrixPosY, orientation, shipLenght)) {
+						for(int i=0; i<shipLenght; i++) {
+							player1.updateBoardCell(matrixPosX, i+matrixPosY, new Cell(matrixPosX, matrixPosY, CellConstants.CRUISER_TYPE));
+							this.boatInsertId = 3;
+						}
+					}
+				}
+				break;
+			//Submarine
+			case 3:
+				shipLenght = 2;
+				if((orientation == 'H') && (boardPosX <= (10 - shipLenght))) {
+					if(isAValidPosition(matrixPosX, matrixPosY, orientation, shipLenght)) {
+						for(int i=0; i<shipLenght; i++) {
+							player1.updateBoardCell(i+matrixPosX, matrixPosY, new Cell(matrixPosX, matrixPosY, CellConstants.SUBMARINE_TYPE));
+							this.boatInsertId = 4;
+						}
+					}
+				} else if((orientation == 'V') && (boardPosY <= (10 - shipLenght))) {
+					if(isAValidPosition(matrixPosX, matrixPosY, orientation, shipLenght)) {
+						for(int i=0; i<shipLenght; i++) {
+							player1.updateBoardCell(matrixPosX, i+matrixPosY, new Cell(matrixPosX, matrixPosY, CellConstants.SUBMARINE_TYPE));
+							this.boatInsertId = 4;
+						}
+					}
+				}
+				break;
+			//Destroyer
+			case 4:
+				shipLenght = 2;
+				if((orientation == 'H') && (boardPosX <= (10 - shipLenght))) {
+					if(isAValidPosition(matrixPosX, matrixPosY, orientation, shipLenght)) {
+						for(int i=0; i<shipLenght; i++) {
+							player1.updateBoardCell(i+matrixPosX, matrixPosY, new Cell(matrixPosX, matrixPosY, CellConstants.DESTROYER_TYPE));
+							this.boatInsertId = 5;
+							setBoardScreen();
+						}
+					}
+				} else if((orientation == 'V') && (boardPosY <= (10 - shipLenght))) {
+					if(isAValidPosition(matrixPosX, matrixPosY, orientation, shipLenght)) {
+						for(int i=0; i<shipLenght; i++) {
+							player1.updateBoardCell(matrixPosX, i+matrixPosY, new Cell(matrixPosX, matrixPosY, CellConstants.DESTROYER_TYPE));
+							this.boatInsertId = 5;
+							setBoardScreen();
+						}
+					}
+				}
+				break;
+			default:
+				break;
+		}
+	}
+	
+	private boolean isAValidPosition(int matrixPosX, int matrixPosY, char orientation, int lenght) {
+		boolean valid = true;
+		if(orientation == 'H') {
+			for(int tempMatrixPosX=matrixPosX-1; tempMatrixPosX<lenght+2; tempMatrixPosX++) {
+				for(int tempMatrixPosY=matrixPosY-1; tempMatrixPosY<matrixPosY+2; tempMatrixPosY++) {
+					if((tempMatrixPosX < 10) && (tempMatrixPosY < 10) && (tempMatrixPosX >= 0) && (tempMatrixPosY >= 0)) {
+						if(player1.getCellType(tempMatrixPosX, tempMatrixPosY) != CellConstants.WATER_TYPE) {
+							valid = false;
+						}
+					}
+				}
+			}
+		} else if(orientation == 'V') {
+			for(int tempMatrixPosX=matrixPosX-1; tempMatrixPosX<matrixPosX+2; tempMatrixPosX++) {
+				for(int tempMatrixPosY=matrixPosY-1; tempMatrixPosY<lenght+2; tempMatrixPosY++) {
+					if((tempMatrixPosX < 10) && (tempMatrixPosY < 10) && (tempMatrixPosX >= 0) && (tempMatrixPosY >= 0)) {
+						if(player1.getCellType(tempMatrixPosX, tempMatrixPosY) != CellConstants.WATER_TYPE) {
+							valid = false;
+						}
+					}
+				}
+			}
+		}
+		return valid;
+	}
+	
+	private String removeAllNonNumericCharacters(String text) {
+		return text.replaceAll("[^\\\\d.]", "");
+	}
+	
+	private void selectedShipInfo(int boatCountId) {
+		switch(boatCountId) {
+			case 0:
+				this.screenMessageTop = "║ Select Carrier position                            ║\n";
+				break;
+			case 1:
+				this.screenMessageTop = "║ Select Battleship position                         ║\n";
+				break;
+			case 2:
+				this.screenMessageTop = "║ Select Cruiser position                            ║\n";
+				break;
+			case 3:
+				this.screenMessageTop = "║ Select Submarine position                          ║\n";
+				break;
+			case 4:
+				this.screenMessageTop = "║ Select Destroyer position                          ║\n";
+				break;
+			default:
+				break;
+		}
 	}
 }
