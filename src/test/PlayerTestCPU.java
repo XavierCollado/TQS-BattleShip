@@ -37,25 +37,42 @@ class PlayerTestCPU {
     int posY = 4;
 
     //When
-    playerCPU.getBoard().getCell(posX, posY).hit();
     playerCPU.playTurn(posX, posY);
 
     //Then
     assertEquals(true,playerCPU.getBoard().getCell(posX,posY).ishit());
   }
+  
   @Test
-  void TestUpdateBoardCellisntHitAtFirst() {
+  void TestUpdateBoardCellChangeCorrectlyTheCell() {
     //Given
     PlayerCPU playerCPU = new PlayerCPU();
     int posX = 4;
     int posY = 5;
+    Cell newCell = new Cell(4, 5, CellConstants.BATTLESHIP_TYPE);
 
     //When
-    playerCPU.updateBoardCell(posX, posY, playerCPU.getBoard().getCell(posX, posY));
+    playerCPU.updateBoardCell(posX, posY, newCell);
 
     //Then
-    assertEquals(true,playerCPU.getBoard().getCell(posX, posY).ishit());
+    assertEquals(newCell, playerCPU.getBoard().getCell(posX, posY));
   }
+  
+  @Test
+  void TestUpdateBoardCellChangeCorrectlyTheCellAndDontHitTheNewCell() {
+    //Given
+    PlayerCPU playerCPU = new PlayerCPU();
+    int posX = 4;
+    int posY = 5;
+    Cell newCell = new Cell(4, 5, CellConstants.BATTLESHIP_TYPE);
+
+    //When
+    playerCPU.updateBoardCell(posX, posY, newCell);
+
+    //Then
+    assertEquals(false, playerCPU.isCellHit(posX, posY));
+  }
+  
   @Test
   void TestUpdateBoardCelliHitAtFirst() {
     //Given
